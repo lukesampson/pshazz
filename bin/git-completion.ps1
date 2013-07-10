@@ -137,7 +137,7 @@ if($fragment -match "^(?<cmd>\S+)(?<args> .*)$") {
     $fragment = expandGitAlias $Matches['cmd'] $Matches['args']
 }
 
-switch -regex $fragment {
+switch -regex ($fragment) {
 
     # Handles git <cmd> <op>
     "^(?<cmd>$($subcommands.Keys -join '|'))\s+(?<op>\S*)$" {
