@@ -4,33 +4,5 @@ $userpath = [environment]::getEnvironmentVariable('path','user').trimend(';');
 $machpath = [environment]::getEnvironmentVariable('path','machine').trimstart(';');
 $env:path = "$userpath;$machpath"
 
-function git_prompt_info {
-    $ref = git symbolic-ref HEAD
-    if($ref) {
-        $ref = $ref -replace '^refs/heads/', ''
-        write-host " ($ref)" -f red -nonewline
-    }
-}
 
-function prompt {
-    write-host "$(split-path $pwd -leaf)" -f cyan -nonewline
-    git_prompt_info
-    write-host ' $' -nonewline
-    " "
-}
-
-
-# tab expansion
-$completions = @{ }
-if(gcm git-completion) {
-    $completions.git = git-completion
-}
-
-if(test-path function:\tabexpansion) {
-    $baseTabExpansion = gc function:\tabexpansion
-}
-function tabExpansion($line, $lastWord) {
-    write-host $line -f green
-
-    if($baseTabExpansion) { & baseTabExpansion $line $lastWord }
-}
+pshazz # initialize pshazz

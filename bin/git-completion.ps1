@@ -3,6 +3,8 @@
 # 
 # Initial implementation by Jeremy Skinner
 # http://www.jeremyskinner.co.uk/2010/03/07/using-git-with-windows-powershell/
+param($fragment) # everything after ^git\s*
+
 $subcommands = @{
     bisect = 'start bad good skip reset visualize replay log run'
     notes = 'edit show'
@@ -22,19 +24,12 @@ $gitflowsubcommands = @{
 }
 
 function script:gitCmdOperations($commands, $command, $filter) {
-    $commands.$command -split ' ' |
-        where { $_ -like "$filter*" }
+    $commands.$command -split ' ' | where { $_ -like "$filter*" }
 }
 
 
 $script:someCommands = @('add','am','annotate','archive','bisect','blame','branch','bundle','checkout','cherry','cherry-pick','citool','clean','clone','commit','config','describe','diff','difftool','fetch','format-patch','gc','grep','gui','help','init','instaweb','log','merge','mergetool','mv','notes','prune','pull','push','rebase','reflog','remote','rerere','reset','revert','rm','shortlog','show','stash','status','submodule','svn','tag','whatchanged')
-try {
-  if ((git flow 2> $null) -ne $null) {
-      $script:someCommands += 'flow'
-  }
-}
-catch {
-}
+if((git flow 2> $null) -ne $null) { $script:someCommands += 'flow' }
 
 function script:gitCommands($filter, $includeAliases) {
     $cmdList = @()
@@ -137,7 +132,6 @@ function script:expandGitAlias($cmd, $rest) {
         return "git $cmd$rest"
     }
 }
-param($fragment)
 
 if($fragment -match "^(?<cmd>\S+)(?<args> .*)$") {
     $fragment = expandGitAlias $Matches['cmd'] $Matches['args']
