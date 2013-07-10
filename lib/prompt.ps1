@@ -1,4 +1,4 @@
-function git_prompt_info {
+function global:git_prompt_info {
     $ref = git symbolic-ref HEAD
     if($ref) {
         $ref = $ref -replace '^refs/heads/', ''
@@ -6,7 +6,7 @@ function git_prompt_info {
     }
 }
 
-function prompt {
+function global:prompt {
     write-host "$(split-path $pwd -leaf)" -f cyan -nonewline
     git_prompt_info
     write-host ' $' -nonewline

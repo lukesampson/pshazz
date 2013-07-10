@@ -23,15 +23,15 @@ $gitflowsubcommands = @{
     hotfix = 'list start finish publish track'
 }
 
-function script:gitCmdOperations($commands, $command, $filter) {
+function gitCmdOperations($commands, $command, $filter) {
     $commands.$command -split ' ' | where { $_ -like "$filter*" }
 }
 
 
-$script:someCommands = @('add','am','annotate','archive','bisect','blame','branch','bundle','checkout','cherry','cherry-pick','citool','clean','clone','commit','config','describe','diff','difftool','fetch','format-patch','gc','grep','gui','help','init','instaweb','log','merge','mergetool','mv','notes','prune','pull','push','rebase','reflog','remote','rerere','reset','revert','rm','shortlog','show','stash','status','submodule','svn','tag','whatchanged')
-if((git flow 2> $null) -ne $null) { $script:someCommands += 'flow' }
+$someCommands = @('add','am','annotate','archive','bisect','blame','branch','bundle','checkout','cherry','cherry-pick','citool','clean','clone','commit','config','describe','diff','difftool','fetch','format-patch','gc','grep','gui','help','init','instaweb','log','merge','mergetool','mv','notes','prune','pull','push','rebase','reflog','remote','rerere','reset','revert','rm','shortlog','show','stash','status','submodule','svn','tag','whatchanged')
+if((git flow 2> $null) -ne $null) { $someCommands += 'flow' }
 
-function script:gitCommands($filter, $includeAliases) {
+function gitCommands($filter, $includeAliases) {
     $cmdList = @()
     $cmdList += git help --all |
         where { $_ -match '^  \S.*' } |
@@ -44,11 +44,11 @@ function script:gitCommands($filter, $includeAliases) {
     $cmdList | sort
 }
 
-function script:gitRemotes($filter) {
+function gitRemotes($filter) {
     git remote | where { $_ -like "$filter*" }
 }
 
-function script:gitBranches($filter, $includeHEAD = $false) {
+function gitBranches($filter, $includeHEAD = $false) {
     $prefix = $null
     if ($filter -match "^(?<from>\S*\.{2,3})(?<to>.*)") {
         $prefix = $matches['from']
@@ -62,43 +62,43 @@ function script:gitBranches($filter, $includeHEAD = $false) {
         foreach { $prefix + $_ }
 }
 
-function script:gitRemoteBranches($remote, $ref, $filter) {
+function gitRemoteBranches($remote, $ref, $filter) {
     git branch --no-color -r |
         where { $_ -like "  $remote/$filter*" } |
         foreach { $ref + ($_ -replace "  $remote/","") }
 }
 
-function script:gitStashes($filter) {
+function gitStashes($filter) {
     (git stash list) -replace ':.*','' |
         where { $_ -like "$filter*" } |
         foreach { "'$_'" }
 }
 
-function script:gitTfsShelvesets($filter) {
+function gitTfsShelvesets($filter) {
     (git tfs shelve-list) |
         where { $_ -like "$filter*" } |
         foreach { "'$_'" }
 }
 
-function script:gitFiles($filter, $files) {
+function gitFiles($filter, $files) {
     $files | sort |
         where { $_ -like "$filter*" } |
         foreach { if($_ -like '* *') { "'$_'" } else { $_ } }
 }
 
-function script:gitIndex($filter) {
+function gitIndex($filter) {
     gitFiles $filter $GitStatus.Index
 }
 
-function script:gitAddFiles($filter) {
+function gitAddFiles($filter) {
     gitFiles $filter (@($GitStatus.Working.Unmerged) + @($GitStatus.Working.Modified) + @($GitStatus.Working.Added))
 }
 
-function script:gitCheckoutFiles($filter) {
+function gitCheckoutFiles($filter) {
     gitFiles $filter (@($GitStatus.Working.Unmerged) + @($GitStatus.Working.Modified) + @($GitStatus.Working.Deleted))
 }
 
-function script:gitDiffFiles($filter, $staged) {
+function gitDiffFiles($filter, $staged) {
     if ($staged) {
         gitFiles $filter $GitStatus.Index.Modified
     } else {
@@ -106,15 +106,15 @@ function script:gitDiffFiles($filter, $staged) {
     }
 }
 
-function script:gitMergeFiles($filter) {
+function gitMergeFiles($filter) {
     gitFiles $filter $GitStatus.Working.Unmerged
 }
 
-function script:gitDeleted($filter) {
+function gitDeleted($filter) {
     gitFiles $filter $GitStatus.Working.Deleted
 }
 
-function script:gitAliases($filter) {
+function gitAliases($filter) {
     git config --get-regexp ^alias\. | foreach {
         if($_ -match "^alias\.(?<alias>\S+) .*") {
             $alias = $Matches['alias']
@@ -125,11 +125,11 @@ function script:gitAliases($filter) {
     } | Sort
 }
 
-function script:expandGitAlias($cmd, $rest) {
+function expandGitAlias($cmd, $rest) {
     if((git config --get-regexp "^alias\.$cmd`$") -match "^alias\.$cmd (?<cmd>[^!].*)`$") {
-        return "git $($Matches['cmd'])$rest"
+        return "$($Matches['cmd'])$rest"
     } else {
-        return "git $cmd$rest"
+        return "$cmd$rest"
     }
 }
 
