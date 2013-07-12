@@ -1,3 +1,8 @@
+# Based on Keith Dahlby's GitTabExpansion.ps1 from PoshGit
+# https://github.com/dahlbyk/posh-git
+# 
+# Initial implementation by Jeremy Skinner
+# http://www.jeremyskinner.co.uk/2010/03/07/using-git-with-windows-powershell/
 $subcommands = @{
     bisect = 'start bad good skip reset visualize replay log run'
     notes = 'edit show'
