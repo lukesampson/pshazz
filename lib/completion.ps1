@@ -1,11 +1,10 @@
 # tab completion
 $global:completions = @{ } # hash of commands to completion functions
+
 if(gcm git-completion) {
     $global:completions.git = (gcm git-completion).definition
 }
-#if(test-path function:\tabexpansion) {
-#    $baseTabExpansion = gc function:\tabexpansion
-#}
+
 function global:tabExpansion($line, $lastWord) {
     $expression = [regex]::split($line, '[|;]')[-1].trimstart()
 
@@ -14,6 +13,4 @@ function global:tabExpansion($line, $lastWord) {
             return & $global:completions[$cmd] $matches['fragment']
         }
     }
-
-    #if($baseTabExpansion) { & baseTabExpansion $line $lastWord }
 }
