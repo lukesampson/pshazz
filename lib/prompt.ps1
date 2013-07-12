@@ -1,5 +1,5 @@
 function global:git_prompt_info {
-    $ref = git symbolic-ref HEAD
+    $ref = try { git symbolic-ref HEAD } catch { }
     if($ref) {
         $ref = $ref -replace '^refs/heads/', ''
         write-host " ($ref)" -f red -nonewline
