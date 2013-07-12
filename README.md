@@ -3,9 +3,9 @@
 
 Pshazz extends your powershell profile to add things like
 
-    * Themes
-    * A nicer prompt, including Git info
-    * Git tab completion
+* Themes
+* A nicer prompt, including Git info
+* Git tab completion
 
 ### Installation
 Using [Scoop](http://scoop.sh):
