@@ -1,8 +1,10 @@
 # tab completion
 $global:completions = @{ } # hash of commands to completion functions
 
-if(gcm git-completion) {
-    $global:completions.git = (gcm git-completion).definition
+try { $git = gcm git -ea stop } catch {}
+
+if($git) {
+    $global:completions.git = resolve-path "$psscriptroot\..\libexec\git-complete.ps1"
 }
 
 function global:tabExpansion($line, $lastWord) {
