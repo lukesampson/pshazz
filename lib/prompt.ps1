@@ -12,8 +12,8 @@ function global:git_prompt_info {
 }
 
 function global:prompt {
+    write-host '$ ' -f darkblue -nonewline 
     write-host "$(split-path $pwd -leaf)" -f cyan -nonewline
     git_prompt_info
-    write-host ' $' -f cyan -nonewline 
     " "
 }
