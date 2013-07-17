@@ -1,0 +1,3 @@
+{
+    "prompt": "c[$] c[$dir] f:red[$git_branch$git_dirty]"
+}

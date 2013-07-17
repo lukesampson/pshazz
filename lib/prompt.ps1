@@ -12,8 +12,15 @@ function global:git_prompt_info {
 }
 
 function global:prompt {
+    $saveexitcode = $lastexitcode
+    write-host "ex$lastexitcode" -f green -nonewline
     write-host '$ ' -f darkblue -nonewline 
     write-host "$(split-path $pwd -leaf)" -f cyan -nonewline
     git_prompt_info
+
+    $global:lastexitcode = $saveexitcode
     " "
 }
+
+# prompt 
+# $executionContext.invokeCommand.expandString("$pwd")
