@@ -13,10 +13,10 @@ function global:git_prompt_info {
 
 function global:prompt {
     $saved_lastexitcode = $lastexitcode
-
-    write-host '$ ' -nonewline 
+    
     write-host "$(split-path $pwd -leaf)" -f cyan -nonewline
     git_prompt_info
+    write-host ' $' -f green -nonewline
 
     $global:lastexitcode = $saved_lastexitcode
     " "
