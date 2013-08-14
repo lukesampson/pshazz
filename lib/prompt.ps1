@@ -19,15 +19,20 @@ function global:pshazz_dir {
 	return $dir
 }
 
-function format($str, $hash) {
-	$hash.keys | % { set-variable $_ $hash[$_] }
-	$executionContext.invokeCommand.expandString($str)
-}
-
 function global:pshazz_write_prompt($prompt, $vars) {
-	#write-host $prompt
-	$prompt | % {
-		write-host $_[2] -nonewline
+	$vars.keys | % { set-variable $_ $vars[$_] }
+	function eval($str) {
+		$executionContext.invokeCommand.expandString($str)
+	}
+
+	$fg_default = $host.ui.rawui.foregroundcolor
+	$bg_default = $host.ui.rawui.backgroundcolor
+
+	$prompt | % { # write each element of the prompt
+		$fg = $_[0]; $bg = $_[1]
+		if(!$fg) { $fg = $fg_default }
+		if(!$bg) { $bg = $bg_default }
+		write-host (eval $_[2]) -nonewline -f $fg -b $bg
 	}
 }
 
