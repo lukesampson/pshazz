@@ -1,16 +1,3 @@
-
-# returns (branch, dirty)
-function global:pshazz_git_prompt_info {
-	try { $ref = git symbolic-ref HEAD } catch { }
-	if($ref) {
-		$ref -replace '^refs/heads/', '' # branch name
-		try { $status = git status --porcelain } catch { }
-		if($status) {
-			$global:pshazz.git.prompt_dirty
-		}
-	}
-}
-
 function global:pshazz_dir {
 	if($pwd -like $home) { return '~' }
 
@@ -43,9 +30,13 @@ function global:prompt {
 		dir = pshazz_dir
 	}
 
-	$git_branch, $git_dirty = @(pshazz_git_prompt_info)
-	$global:pshazz.prompt_vars.git_branch = $git_branch
-	$global:pshazz.prompt_vars.git_dirty = $git_dirty
+	# get plugins to populate prompt vars
+	$global:pshazz.theme.plugins | % {
+		$prompt_fn = "pshazz:$_`:prompt"
+		if(test-path "function:\$prompt_fn") {
+			& $prompt_fn
+		}
+	}
 	
 	pshazz_write_prompt $global:pshazz.theme.prompt $global:pshazz.prompt_vars
 
