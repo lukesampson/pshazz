@@ -1,8 +1,8 @@
 param($cmd, $theme)
 
 . "$psscriptroot\..\lib\core.ps1"
-. "$psscriptroot\..\lib\completion.ps1"
 . "$psscriptroot\..\lib\prompt.ps1"
+. "$psscriptroot\..\lib\completion.ps1"
 . "$psscriptroot\..\lib\theme.ps1"
 . "$psscriptroot\..\lib\plugin.ps1"
 
@@ -21,6 +21,7 @@ function init($theme_name) {
 
 	$global:pshazz = @{ }
 	$pshazz.theme = $theme
+	$pshazz.completions = @{ }
 
 	$theme.plugins | % {
 		plugin:init $_

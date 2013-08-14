@@ -6,5 +6,9 @@ function plugin:init($name) {
         "couldn't find plugin '$name' at $path"; return
     }
     . $path
-    iex "pshazz:$name`:init"
+
+    $initfn = "pshazz:$name`:init"
+    if(test-path "function:\$initfn") {
+        & $initfn
+    }
 }
