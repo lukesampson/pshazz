@@ -9,8 +9,8 @@ Pshazz extends your powershell profile to add things like
 
 ### Installation
 Using [Scoop](http://scoop.sh):
-    
-    scoop install pshazz
+	
+	scoop install pshazz
 
 ### On the shoulders of giants...
 Pshazz borrows heavily from [Posh-Git](https://github.com/dahlbyk/posh-git) by [Keith Dahlby](http://lostechies.com/keithdahlby/) for Git completions.

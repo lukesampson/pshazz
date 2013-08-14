@@ -3,12 +3,11 @@
 	[
 		{
 			"path": "/Volumes/C/Users/luke/projects/pshazz",
-			"file_exclude_patterns": [ "*.git*", "*.sublime-*" ]
+			"file_exclude_patterns": [ "*.git*", "*.sublime-*", "*~" ]
 		}
 	],
 	"settings": {
 		"default_line_ending": "windows",
-		"tab_size": 4,
-		"translate_tabs_to_spaces": true
+		"tab_size": 4
 	}
 }

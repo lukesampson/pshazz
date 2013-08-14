@@ -1,0 +1,8 @@
+{
+	"prompt": [
+		[ "cyan",  "", "$dir " ],
+		[ "red",   "", "$git_branch$git_dirty " ],
+		[ "green", "", "`$" ]
+	],
+	"prompt_git_dirty": "*",
+}
