@@ -3,9 +3,11 @@
 
 Pshazz extends your powershell profile to add things like
 
-* Themes
 * A nicer prompt, including Git info
 * Git tab completion
+* An SSH helper that lets you never enter your private key password again.
+
+And it uses themes, so you can create your own theme if the defaults aren't quite what you want.
 
 ### Installation
 Using [Scoop](http://scoop.sh):
@@ -13,6 +15,9 @@ Using [Scoop](http://scoop.sh):
 	scoop install pshazz
 
 ### On the shoulders of giants...
-Pshazz borrows heavily from [Posh-Git](https://github.com/dahlbyk/posh-git) by [Keith Dahlby](http://lostechies.com/keithdahlby/) for Git completions.
+Pshazz borrows from:
 
-Inspired by [Oh-My-Zsh](https://github.com/robbyrussell/oh-my-zsh)
+*[Posh-Git](https://github.com/dahlbyk/posh-git) by [Keith Dahlby](http://lostechies.com/keithdahlby/) for Git completions
+*[git-credential-winstore](http://gitcredentialstore.codeplex.com/) by [Andrew Nurse](http://vibrantcode.com/) and others, for saving SSH passwords.
+
+Inspired by [Oh-My-Zsh](https://github.com/robbyrussell/oh-my-zsh) and [sub](https://github.com/37signals/sub).

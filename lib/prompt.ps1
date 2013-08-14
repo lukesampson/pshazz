@@ -39,15 +39,17 @@ function global:pshazz_write_prompt($prompt, $vars) {
 function global:prompt {
 	$saved_lastexitcode = $lastexitcode
 
-	$dir = pshazz_dir
-	$git_branch, $git_dirty = @(pshazz_git_prompt_info)
-
-	# cheat
+	#cheat
+	$env:pshazz_prompt_git_dirty = '*'
 	$prompt = @(
 		@("cyan",  "", '$dir '),
 		@("red",   "", '$git_branch$git_dirty '),
 		@("green", "", '`$')
 	)
+
+	$dir = pshazz_dir
+	$git_branch, $git_dirty = @(pshazz_git_prompt_info)
+	
 	pshazz_write_prompt $prompt @{
 		dir = $dir;
 		git_branch = $git_branch;

@@ -8,4 +8,4 @@ if("$src" -eq "$dest") { abort "$(strip_ext $myinvocation.mycommand.name) is for
 robocopy $src $dest /mir /njh /njs /nfl /ndl /xd .git /xf .DS_Store manifest.json install.json
 
 'reloading pshazz'
-pshazz
+pshazz init
