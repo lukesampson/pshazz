@@ -6,7 +6,7 @@ param($cmd, $theme)
 . "$psscriptroot\..\lib\theme.ps1"
 . "$psscriptroot\..\lib\plugin.ps1"
 
-$usage = "pshazz init [theme]"
+$usage = "usage: pshazz init [theme]"
 
 function init($theme_name) {
     $theme = theme $theme_name
@@ -24,7 +24,7 @@ function init($theme_name) {
     }
 }
 
-if(!$cmd) { "cmd missing"; $usage; exit 1 }
+if(!$cmd) { "pshazz: cmd missing"; $usage; exit 1 }
 
 switch($cmd) {
     "init" {
@@ -32,6 +32,6 @@ switch($cmd) {
         init $theme
     }
     default: {
-        "unknown command: $cmd"; $usage; exit 1
+        "pshazz: unknown command: $cmd"; $usage; exit 1
     }
 }
