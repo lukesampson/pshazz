@@ -19,9 +19,14 @@ function init($theme_name) {
         else { exit 1 } # already tried loading default theme, abort
     }
 
+    $global:pshazz = @{ }
+
     $theme.plugins | % {
         plugin:init $_
     }
+
+    $pshazz.prompt = $theme.prompt
+    $pshazz.prompt_git_dirty = $theme.prompt_git_dirty
 }
 
 if(!$cmd) { "pshazz: cmd missing"; $usage; exit 1 }
