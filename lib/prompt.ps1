@@ -6,7 +6,7 @@ function global:pshazz_git_prompt_info {
 		$ref -replace '^refs/heads/', '' # branch name
 		try { $status = git status --porcelain } catch { }
 		if($status) {
-			$global:pshazz.prompt_git_dirty
+			$global:pshazz.git.prompt_dirty
 		}
 	}
 }
@@ -39,14 +39,15 @@ function global:pshazz_write_prompt($prompt, $vars) {
 function global:prompt {
 	$saved_lastexitcode = $lastexitcode
 
-	$dir = pshazz_dir
-	$git_branch, $git_dirty = @(pshazz_git_prompt_info)
-	
-	pshazz_write_prompt $global:pshazz.prompt @{
-		dir = $dir;
-		git_branch = $git_branch;
-		git_dirty = $git_dirty
+	$global:pshazz.prompt_vars = @{
+		dir = pshazz_dir
 	}
+
+	$git_branch, $git_dirty = @(pshazz_git_prompt_info)
+	$global:pshazz.prompt_vars.git_branch = $git_branch
+	$global:pshazz.prompt_vars.git_dirty = $git_dirty
+	
+	pshazz_write_prompt $global:pshazz.theme.prompt $global:pshazz.prompt_vars
 
 	$global:lastexitcode = $saved_lastexitcode
 	" "

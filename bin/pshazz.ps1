@@ -9,34 +9,32 @@ param($cmd, $theme)
 $usage = "usage: pshazz init [theme]"
 
 function init($theme_name) {
-    $theme = theme $theme_name
+	$theme = theme $theme_name
 
-    if(!$theme) {
-        "ERROR: couldn't load theme '$theme_name' in $themedir"
+	if(!$theme) {
+		"ERROR: couldn't load theme '$theme_name' in $themedir"
 
-        # try reverting to default theme
-        if($theme_name -ne 'default') { $theme = theme 'default' }
-        else { exit 1 } # already tried loading default theme, abort
-    }
+		# try reverting to default theme
+		if($theme_name -ne 'default') { $theme = theme 'default' }
+		else { exit 1 } # already tried loading default theme, abort
+	}
 
-    $global:pshazz = @{ }
+	$global:pshazz = @{ }
+	$pshazz.theme = $theme
 
-    $theme.plugins | % {
-        plugin:init $_
-    }
-
-    $pshazz.prompt = $theme.prompt
-    $pshazz.prompt_git_dirty = $theme.prompt_git_dirty
+	$theme.plugins | % {
+		plugin:init $_
+	}
 }
 
 if(!$cmd) { "pshazz: cmd missing"; $usage; exit 1 }
 
 switch($cmd) {
-    "init" {
-        if(!$theme) { $theme = 'default' }
-        init $theme
-    }
-    default: {
-        "pshazz: unknown command: $cmd"; $usage; exit 1
-    }
+	"init" {
+		if(!$theme) { $theme = 'default' }
+		init $theme
+	}
+	default: {
+		"pshazz: unknown command: $cmd"; $usage; exit 1
+	}
 }
