@@ -1,5 +1,3 @@
-$erroractionpreference = 'continue'
-
 if(!(test-path $profile)) {
 	$profile_dir = split-path $profile
 	if(!(test-path $profile_dir)) { mkdir $profiledir > $null } 
