@@ -1,5 +1,5 @@
 {
-	"plugins": [ "ssh", "git" ],
+	"plugins": [ "git", "ssh" ],
 	"prompt": [
 		[ "cyan",  "", "$dir " ],
 		[ "red",   "", "$git_branch$git_dirty " ],

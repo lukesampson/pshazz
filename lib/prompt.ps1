@@ -15,11 +15,16 @@ function global:pshazz_write_prompt($prompt, $vars) {
 	$fg_default = $host.ui.rawui.foregroundcolor
 	$bg_default = $host.ui.rawui.backgroundcolor
 
-	$prompt | % { # write each element of the prompt
-		$fg = $_[0]; $bg = $_[1]
-		if(!$fg) { $fg = $fg_default }
-		if(!$bg) { $bg = $bg_default }
-		write-host (eval $_[2]) -nonewline -f $fg -b $bg
+	# write each element of the prompt, stripping out portions
+	# that evaluate to blank strings
+	$prompt | % {
+		$str = eval $_[2]
+		if(![string]::isnullorwhitespace($str)) {
+			$fg = $_[0]; $bg = $_[1]
+			if(!$fg) { $fg = $fg_default }
+			if(!$bg) { $bg = $bg_default }
+			write-host $str -nonewline -f $fg -b $bg
+		}
 	}
 }
 

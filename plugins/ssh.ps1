@@ -42,6 +42,13 @@ function agent_start {
 	. $envfile > $null
 }
 
+function add_keys {
+	$env:SSH_ASKPASS = resolve-path "$psscriptroot\..\libexec\askpass.exe"
+	$env:DISPLAY = "localhost:0.0"
+
+	$null | ssh-add
+}
+
 # pshazz plugin entry point
 function pshazz:ssh:init {
 	if(!(agent_is_running)) {
@@ -50,8 +57,8 @@ function pshazz:ssh:init {
 
 	if(!(agent_is_running)) {
 		agent_start
-		ssh-add
+		add_keys
 	} elseif(!(agent_has_keys)) {
-		ssh-add
+		add_keys
 	}
 }
