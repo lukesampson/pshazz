@@ -20,4 +20,4 @@ Pshazz borrows from:
 *[Posh-Git](https://github.com/dahlbyk/posh-git) by [Keith Dahlby](http://lostechies.com/keithdahlby/) for Git completions
 *[git-credential-winstore](http://gitcredentialstore.codeplex.com/) by [Andrew Nurse](http://vibrantcode.com/) and others, for saving SSH passwords.
 
-Inspired by [Oh-My-Zsh](https://github.com/robbyrussell/oh-my-zsh) and [sub](https://github.com/37signals/sub).
+Inspired by [Oh-My-Zsh](https://github.com/robbyrussell/oh-my-zsh).
