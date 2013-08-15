@@ -9,3 +9,5 @@ if((gc $profile | sls 'pshazz') -eq $null) {
 } else {
 	write-host 'it looks like pshazz is already in your powershell profile, skipping'
 }
+
+& "$psscriptroot\pshazz" init 'default'
