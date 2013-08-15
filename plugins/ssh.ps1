@@ -38,6 +38,8 @@ function agent_start {
 	$script = $script -creplace '([A-Z_]+)=([^;]+).*', '$$env:$1="$2"' `
 		-creplace 'echo ([^;]+);', 'echo "$1"'
 
+	if(!(test-path "~/.ssh")) { mkdir "~/.ssh" > $null }
+
 	$script > $envfile
 	. $envfile > $null
 }
