@@ -1,6 +1,6 @@
 if(!(test-path $profile)) {
 	$profile_dir = split-path $profile
-	if(!(test-path $profile_dir)) { mkdir $profiledir > $null } 
+	if(!(test-path $profile_dir)) { mkdir $profile_dir > $null } 
 	'' > $profile
 }
 if((gc $profile | sls 'pshazz') -eq $null) {
