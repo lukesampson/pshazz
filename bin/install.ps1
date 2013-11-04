@@ -5,7 +5,8 @@ if(!(test-path $profile)) {
 }
 if((gc $profile | sls 'pshazz') -eq $null) {
 	write-host 'adding pshazz to your powershell profile'
-	(gc $profile -raw) + "`r`ntry { `$null = gcm pshazz -ea stop; pshazz init 'default' } catch { }`r`n" > $profile
+	$new_profile = (gc $profile -raw) + "`r`ntry { `$null = gcm pshazz -ea stop; pshazz init 'default' } catch { }`r`n"
+    $new_profile > $profile
 } else {
 	write-host 'it looks like pshazz is already in your powershell profile, skipping'
 }
