@@ -3,6 +3,6 @@
 $path = "$plugindir\z"
 Import-Module $path
 Set-Alias z Search-NavigationHistory -Scope "global"
-function Prompt {
+function global:Prompt {
     Update-NavigationHistory $pwd.Path
 }
