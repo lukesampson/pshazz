@@ -30,7 +30,7 @@ function Calculate-FrecencyValue {
 
 function MatchAll-Patterns {
 	Param([String]$string, [Array][String]$patterns)
-	
+
 	foreach ($pattern in $patterns) {
 		if ($string -inotmatch $pattern) {
 			return $false
@@ -91,7 +91,7 @@ function Update-NavigationHistory {
 	} catch [System.IO.FileNotFoundException] {
 		[Array]$navdb = @()
 	}
-	
+
 	# Look for an existing record and update it accordingly
 	$found = $false
 	foreach ($item in $navdb) {

@@ -1,8 +1,7 @@
 # Imports [z.ps](https://github.com/JannesMeyer/z.ps)
 
-$path = "$plugindir\z"
-Import-Module $path
+Import-Module "$plugindir\z"
 Set-Alias z Search-NavigationHistory -Scope "global"
-function global:Prompt {
+function global:pshazz:z:prompt {
     Update-NavigationHistory $pwd.Path
 }
