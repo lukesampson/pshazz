@@ -22,4 +22,13 @@ if(($text | sls 'pshazz') -eq $null) {
 	write-host 'it looks like pshazz is already in your powershell profile, skipping'
 }
 
-& "$psscriptroot\pshazz" init 'default'
+""
+"           _                   _"
+" _ __  ___| |__   __ _ _______| |"
+"| '_ \/ __| '_ \ / _` |_  /_  / |"
+"| |_) \__ \ | | | (_| |/ / / /|_|"
+"| .__/|___/_| |_|\__,_/___/___(_)"
+"|_|"
+""
+
+& "$psscriptroot\pshazz" init
