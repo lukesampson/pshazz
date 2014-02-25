@@ -1,10 +1,12 @@
 {
 	"plugins": [ "git", "ssh", "z" ],
 	"prompt": [
-		[ "darkgreen", "", "$user@$hostname " ],
-		[ "darkyellow",  "", "$dir " ],
-		[ "red",   "", "$git_lbracket$git_branch$git_dirty$git_rbracket " ],
-		[ "", "", "`nPS>" ]
+		[ "darkgreen",   "", "$user@$hostname " ],
+		[ "darkyellow",  "", "$path " ],
+		[ "",            "", "$git_lbracket$git_branch" ],
+		[ "red",         "", "$git_dirty" ],
+		[ "",            "", "$git_rbracket "],
+		[ "",            "", "`nPS>" ]
 	],
 	"git": {
 		"prompt_dirty": "*",

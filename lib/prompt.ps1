@@ -6,6 +6,10 @@ function global:pshazz_dir {
 	return $dir
 }
 
+function global:pshazz_path {
+	return $pwd -replace [regex]::escape((resolve-path ~)), "~"
+}
+
 function global:pshazz_write_prompt($prompt, $vars) {
 	$vars.keys | % { set-variable $_ $vars[$_] }
 	function eval($str) {
@@ -35,6 +39,7 @@ function global:prompt {
 
 	$global:pshazz.prompt_vars = @{
 		dir      = pshazz_dir;
+		path     = pshazz_path;
 		user     = $env:username;
 		hostname = $env:computername;
 	}
