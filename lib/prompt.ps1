@@ -28,6 +28,8 @@ function global:pshazz_write_prompt($prompt, $vars) {
 	}
 }
 
+if(!$global:pshazz.theme.prompt) { return } # no prompt specified, keep existing
+
 function global:prompt {
 	$saved_lastexitcode = $lastexitcode
 

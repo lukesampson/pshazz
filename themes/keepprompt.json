@@ -1,0 +1,12 @@
+{
+	"comment": "
+	--------------------------
+	This theme just keeps whatever prompt you already have set up in your $profile.
+	--------------------------
+	",
+	"plugins": [ "git", "ssh" ],
+	"prompt": null,
+	"git": {
+		"prompt_dirty": "*"
+	}
+}
