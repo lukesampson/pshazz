@@ -34,7 +34,9 @@ function global:prompt {
 	$saved_lastexitcode = $lastexitcode
 
 	$global:pshazz.prompt_vars = @{
-		dir = pshazz_dir
+		dir      = pshazz_dir;
+		user     = $env:username;
+		hostname = $env:computername;
 	}
 
 	# get plugins to populate prompt vars

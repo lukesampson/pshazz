@@ -28,5 +28,4 @@ cfg_set_theme $name
 # re-init
 pshazz init
 
-write-host "will use '$name' theme"
-write-host "please start a new session to see all changes (e.g. type 'powershell')"
+write-host "using '$name' theme"
