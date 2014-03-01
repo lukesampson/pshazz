@@ -5,13 +5,13 @@ function fullpath($path) {
 function hashtable($obj) {
 	$h = @{ }
 	$obj.psobject.properties | % {
-		$h[$_.name] = hashtable_val $_.value;
+		$h[$_.name] = hashtable_val $_.value		
 	}
 	return $h
 }
 
 function hashtable_val($obj) {
-	if($obj -is [object[]]) {
+	if($obj -is [array]) {
 		$arr = @()
 		$obj | % {
 			$val = hashtable_val $_
@@ -21,10 +21,10 @@ function hashtable_val($obj) {
 				$arr += $val
 			}
 		}
-		return $arr
+		return ,$arr
 	}
 	if($obj.gettype().name -eq 'pscustomobject') { # -is is unreliable
-		return hashtable($obj)
+		return hashtable $obj
 	}
 	return $obj # assume primitive
 }

@@ -29,7 +29,7 @@ function init($theme_name) {
 	$pshazz.theme = $theme
 	$pshazz.completions = @{ }
 
-	$theme.plugins | % {
+	@($theme.plugins) |? { $_ } |% {
 		plugin:init $_
 	}
 }
