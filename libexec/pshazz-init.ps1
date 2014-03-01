@@ -1,6 +1,8 @@
 # Usage: pshazz init
 # Summary: Initialize pshazz
-# Help: When initializing, pshazz will use the theme configured in ~/.pshazz
+# Help: Usually this is called from your PS profile.
+#
+# When initializing, pshazz will use the theme configured in ~/.pshazz
 # or otherwise revert to the default theme.
 . "$psscriptroot\..\lib\core.ps1"
 . "$psscriptroot\..\lib\help.ps1"
@@ -12,7 +14,7 @@ function init($theme_name) {
 	$theme = theme $theme_name
 
 	if(!$theme) {
-		"ERROR: couldn't load theme '$theme_name' in $themedir"
+		"pshazz: error: couldn't load theme '$theme_name' in $themedir"
 
 		# try reverting to default theme
 		if($theme_name -ne 'default') {

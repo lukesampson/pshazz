@@ -2,17 +2,21 @@ $themedir = fullpath "$psscriptroot\..\themes"
 $user_themedir = "~\pshazz"
 
 function theme($name) {
-	# try userdir first
-	$theme = load_theme "$user_themedir\$name.json"
-	if($theme) { return $theme }
+	$path = find_path $name
+	load_theme $path
+}
+
+function find_path($name) {
+	# try user dir first
+	$path = "$user_themedir\$name.json"
+	if(test-path $path) { return $path }
 
 	# fall back to defaults
-	load_theme "$themedir\$name.json"
+	$path = "$themedir\$name.json"
+	if(test-path $path) { return $path }
 }
 
 function load_theme($path) {
-	if(!(test-path $path)) { return $null }
-
 	try {
 		gc $path -raw | convertfrom-json -ea stop
 	} catch {
