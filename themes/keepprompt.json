@@ -4,7 +4,7 @@
 	This theme just keeps whatever prompt you already have set up in your $profile.
 	--------------------------
 	",
-	"plugins": [ "git", "ssh", "z", "aliases" ],
+	"plugins": [ "git", "hg", "ssh", "z", "aliases" ],
 	"prompt": null,
 	"git": {
 		"prompt_dirty": "*"

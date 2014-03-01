@@ -18,6 +18,7 @@ Using [Scoop](http://scoop.sh):
 Pshazz borrows from:
 
 * [Posh-Git](https://github.com/dahlbyk/posh-git) by [Keith Dahlby](http://lostechies.com/keithdahlby/) for Git completions
+* [Posh-Hg](https://github.com/JeremySkinner/posh-hg) by [Jeremy Skinner](http://www.jeremyskinner.co.uk/) for Mercurial completions
 * [git-credential-winstore](http://gitcredentialstore.codeplex.com/) by [Andrew Nurse](http://vibrantcode.com/) and others, for saving SSH passwords.
 * [z.ps](https://github.com/JannesMeyer/z.ps) by [Jannes Meyer](https://github.com/JannesMeyer) for rapid system navigation
 
