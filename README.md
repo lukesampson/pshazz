@@ -7,7 +7,7 @@ Pshazz extends your powershell profile to add things like
 * Git tab completion
 * An SSH helper that lets you never enter your private key password again.
 
-And it uses themes, so you can create your own theme if the defaults aren't quite what you want.
+And it uses themes, so you can create your own [theme](wiki/Themes) if the defaults aren't quite what you want.
 
 ### Installation
 Using [Scoop](http://scoop.sh):
