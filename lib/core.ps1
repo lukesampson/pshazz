@@ -5,14 +5,12 @@ function fullpath($path) {
 function hashtable($obj) {
 	$h = @{ }
 	$obj.psobject.properties | % {
-		write-host "prop $($_.name)"
 		$h[$_.name] = hashtable_val $_.value;
 	}
 	return $h
 }
 
 function hashtable_val($obj) {
-	write-host "val: $obj ($($obj.gettype()))"
 	if($obj -is [object[]]) {
 		$arr = @()
 		$obj | % {
