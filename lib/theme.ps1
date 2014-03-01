@@ -1,4 +1,4 @@
-$themedir = fullpath "$psscriptroot\..\themes"
+$themedir = (fullpath "$psscriptroot\..\themes") -replace ([regex]::escape((resolve-path ~))), '~'
 $user_themedir = "~\pshazz"
 
 function theme($name) {
