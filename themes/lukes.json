@@ -1,0 +1,18 @@
+{
+	"plugins": [ "git", "ssh", "z", "aliases" ],
+	"prompt": [
+		[ "cyan",  "", "$dir " ],
+		[ "red",   "", "$git_branch$git_dirty " ],
+		[ "green", "", "`$" ]
+	],
+	"git": {
+		"prompt_dirty": "*"
+	},
+	"aliases": {
+		"rm": [ "help", "man" ],
+		"add": {
+			"help($name)": "get-help $name -detailed | less",
+			"man": "help"
+		}
+	}
+}
