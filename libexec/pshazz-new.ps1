@@ -13,7 +13,9 @@ param($name)
 
 if(!$name) { "<name> is required"; my_usage; exit 1 }
 
-if(test-path (user_theme_path $name)) {
+$new_path = "$user_themedir\$name.json"
+
+if(test-path $new_path) {
 	"you already have a theme named $name. use 'pshazz edit $name' to edit it";
 	exit 1
 }
@@ -26,4 +28,6 @@ if(!$editor) {
 	"couldn't find a text editor!"; exit 1
 }
 
-& $editor (resolve-path (user_theme_path $name))
+& $editor (resolve-path $new_path)
+
+"type 'pshazz use $name' when you're ready to try your theme"
