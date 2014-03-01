@@ -1,28 +1,36 @@
 $cfgpath = "~/.pshazz"
 
+function to_hashtable($obj) {
+	$ht = @{}
+	$obj | gm |? { $_.membertype -eq 'noteproperty'} |% {
+		$name = $_.name
+		$ht[$name] = $obj.$name
+	}
+	return $ht
+}
+
 function load_cfg {
 	if(!(test-path $cfgpath)) { return $null }
-
+	
 	try {
-		gc $cfgpath -raw | convertfrom-json -ea stop
+		to_hashtable (gc $cfgpath -raw | convertfrom-json -ea stop)
 	} catch {
 		write-host "ERROR loading $cfgpath`: $($_.exception.message)"
 	}
 }
 
-$cfg = load_cfg
-
-function cfg_theme {
-	if(!$cfg) { return $null }
-	return $cfg.theme
+function get_config($name) {
+	return $cfg.$name
 }
 
-function cfg_set_theme($theme) {
+function set_config($name, $val) {
 	if(!$cfg) {
-		$cfg = new-object psobject @{ theme = $theme }
+		$cfg = @{ $name = $val }
 	} else {
-		$cfg.theme = $theme
+		$cfg.$name = $val
 	}
 
 	convertto-json $cfg | out-file $cfgpath -encoding utf8
 }
+
+$cfg = load_cfg

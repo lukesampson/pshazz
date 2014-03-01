@@ -32,7 +32,7 @@ function init($theme_name) {
 	}
 }
 
-$theme = cfg_theme
+$theme = get_config 'theme'
 if(!$theme) { $theme = 'default' }
 init $theme
 

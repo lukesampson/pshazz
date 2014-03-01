@@ -1,8 +1,6 @@
-# Usage: pshazz theme [name]
-# Summary: Show or change the current theme
+# Usage: pshazz use <theme>
+# Summary: Change the current theme
 # Help: This command will configure pshazz to use the specified theme.
-#
-# Without a [name]
 #
 # To revert to the default theme, use 'default'. E.g.:
 #     pshazz use default
@@ -14,7 +12,7 @@ param($name)
 . "$psscriptroot\..\lib\theme.ps1"
 
 if(!$name) {
-	$global:pshazz.theme_name
+	"using $($global:pshazz.theme_name)"
 	exit 1
 }
 
@@ -23,7 +21,7 @@ $theme = theme $name
 if(!$theme) { "pshazz: couldn't find the theme named '$name'"; exit 1 }
 
 # save theme
-cfg_set_theme $name
+set_config 'theme' $name
 
 # re-init
 pshazz init
