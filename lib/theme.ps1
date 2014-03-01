@@ -3,7 +3,10 @@ $user_themedir = "~\pshazz"
 
 function theme($name) {
 	$path = find_path $name
-	load_theme $path
+	$theme = load_theme $path
+	if($theme) {
+		hashtable $theme
+	}
 }
 
 function find_path($name) {
