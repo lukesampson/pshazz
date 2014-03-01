@@ -3,8 +3,8 @@
 
 Pshazz extends your powershell profile to add things like
 
-* A nicer prompt, including Git info
-* Git tab completion
+* A nicer prompt, including Git and Mercurial info
+* Git and Mercurial tab completion
 * An SSH helper that lets you never enter your private key password again.
 
 And it uses themes, so you can create your own [theme](wiki/Themes) if the defaults aren't quite what you want.
