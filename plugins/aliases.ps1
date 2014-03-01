@@ -17,7 +17,7 @@ function pshazz:aliases:init {
 		}
 	}
 
-	$global:pshazz.theme.aliases.add.keys |% {
+	$global:pshazz.theme.aliases.add.keys |? { $_ } |% {
 		$add.$_ = $global:pshazz.theme.aliases.add.$_
 	}
 
