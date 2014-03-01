@@ -1,5 +1,5 @@
 {
-	"plugins": [ "git", "ssh", "z" ],
+	"plugins": [ "git", "ssh", "z", "aliases" ],
 	"prompt": [
 		[ "darkgreen",   "", "$user@$hostname " ],
 		[ "darkyellow",  "", "$path " ],
