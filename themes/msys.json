@@ -6,7 +6,7 @@
 		[ "",            "", "$git_lbracket$git_branch" ],
 		[ "red",         "", "$git_dirty" ],
 		[ "",            "", "$git_rbracket "],
-		[ "",            "", "`nPS>" ]
+		[ "",            "", "`n$" ]
 	],
 	"git": {
 		"prompt_dirty": "*",

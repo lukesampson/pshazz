@@ -48,6 +48,6 @@ function add_alias_with_params($alias, $cmd) {
 		$fn_body = "param$in_param $fn_body"
 	}
 
-	$null = new-item -path function: -name "global:pshazz.alias_$alias" -options allscope -value $fn_body
+	$null = new-item -path function: -name "global:pshazz.alias_$alias" -options allscope -value $fn_body -force
 	set-alias $alias "pshazz.alias_$alias" -opt allscope -scope global
 }
