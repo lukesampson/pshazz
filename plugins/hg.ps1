@@ -7,10 +7,13 @@ function pshazz:hg:init {
 
 	if(!$dirty) { $dirty = "*" } # default
 
+	$show_bookmark = prompt_uses 'hg_bookmark'
+
 	$global:pshazz.hg = @{
 		prompt_dirty    = $dirty;
 		prompt_lbracket = $hg.prompt_lbracket;
 		prompt_rbracket = $hg.prompt_rbracket;
+		show_bookmark = $show_bookmark;
 	}
 
 	$global:pshazz.completions.hg = resolve-path "$psscriptroot\..\libexec\hg-complete.ps1"
@@ -28,6 +31,11 @@ function global:pshazz:hg:prompt {
 		try { $status = hg status } catch { }
 		if($status) {
 			$vars.hg_dirty = $global:pshazz.hg.prompt_dirty
+		}
+
+		if($global:pshazz.hg.show_bookmark) {
+			$bookmark = hg bookmarks | sls "\* ([^\s]+)" | % { $_.matches.groups[1].value }
+			if($bookmark) { $vars.hg_bookmark = " at $bookmark" }
 		}
 	}
 }

@@ -4,6 +4,7 @@
 		[ "cyan",  "", "$dir" ],
 		[ "red",   "", " $git_branch$git_dirty" ],
 		[ "red",   "", " $hg_branch$hg_dirty" ],
+		[ "", "", "$hg_bookmark" ],
 		[ "green", "", " `$" ]
 	],
 	"git": {
