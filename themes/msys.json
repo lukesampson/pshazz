@@ -1,13 +1,13 @@
 {
 	"plugins": [ "git", "hg", "ssh", "z", "aliases" ],
 	"prompt": [
-		[ "darkgreen",   "", "$user@$hostname" ],
-		[ "darkyellow",  "", " $path" ],
+		[ "green",       "", "$user@$hostname" ],
+		[ "yellow",      "", " $path" ],
 		[ "",            "", " $git_lbracket$git_branch" ],
-		[ "red",         "", "$git_dirty" ],
+		[ "darkred",     "", "$git_dirty" ],
 		[ "",            "", "$git_rbracket"],
 		[ "",            "", " $hg_lbracket$hg_branch$hg_bookmark" ],
-		[ "red",         "", "$hg_dirty" ],
+		[ "darkred",     "", "$hg_dirty" ],
 		[ "",            "", "$hg_rbracket" ],
 		[ "",            "", "`n$" ]
 	],

@@ -1,10 +1,10 @@
 {
 	"plugins": [ "git", "hg", "ssh", "z", "aliases" ],
 	"prompt": [
-		[ "cyan",  "", "$dir" ],
-		[ "red",   "", " $git_branch$git_dirty" ],
-		[ "red",   "", " $hg_branch$hg_dirty" ],
-		[ "green", "", " `$" ]
+		[ "darkcyan",  "", "$dir" ],
+		[ "darkred",   "", " $git_branch$git_dirty" ],
+		[ "darkred",   "", " $hg_branch$hg_dirty" ],
+		[ "darkgreen", "", " `$" ]
 	],
 	"git": {
 		"prompt_dirty": "*"
