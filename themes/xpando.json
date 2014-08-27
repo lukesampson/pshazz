@@ -1,0 +1,30 @@
+{
+	"plugins": [ "git", "hg", "ssh", "z", "aliases", "dircolors" ],
+	"dircolors": {
+		"dirs": [
+			[".*", "cyan", ""]
+		],
+		"files": [
+		    ["(?ix).(7z|zip|tar|gz|rar)$",                        "darkcyan",   ""],
+		    ["(?ix).(exe|bat|cmd|py|pl|ps1|psm1|vbs|rb|reg)$",    "darkgreen",  ""],
+		    ["(?ix).(doc|docx|ppt|pptx|xls|xlsx|mdb|mdf|ldf)$",   "magenta",    ""],
+		    ["(?ix).(txt|cfg|conf|config|yml|ini|csv|log|json)$", "darkyellow", ""],
+		    ["(?ix).(sln|csproj|sqlproj|proj|targets)$",          "darkred",    ""],
+		    [".*",                                                "darkgray",   ""]
+		]
+	},
+	"prompt": [
+		[ "cyan",  "", "$dir" ],
+		[ "red",   "", " $git_branch$git_dirty" ],
+		[ "red",   "", " $hg_branch" ],
+		[ "",      "", "$hg_bookmark" ],
+		[ "red",   "", "$hg_dirty" ],
+		[ "green", "", " `$" ]
+	],
+	"git": {
+		"prompt_dirty": "*"
+	},
+	"hg": {
+		"prompt_dirty": "*"
+	}
+}
