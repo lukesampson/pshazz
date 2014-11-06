@@ -15,12 +15,8 @@
 	},
 	"prompt": [
 		[ "cyan",  "", "$path" ],
-		[ "",			 "", "$git_lbracket$git_branch" ],
-		[ "red",   "", "$git_dirty" ],
-		[ "",      "", "$git_rbracket"],
-		[ "",      "", "$hg_lbracket$hg_branch$hg_bookmark" ],
-		[ "red",   "", "$hg_dirty" ],
-		[ "",      "", "$hg_rbracket" ],
+		[ "red",   "", "$git_lbracket$git_branch$git_dirty$git_rbracket" ],
+		[ "red",   "", "$hg_lbracket$hg_branch$hg_bookmark$hg_dirty$hg_rbracket" ],
 		[ "green", "", "`n$([char]0x3BB)$([char]0x0BB)" ]
 	],
 	"git": {
