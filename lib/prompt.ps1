@@ -7,7 +7,7 @@ function global:pshazz_dir {
 }
 
 function global:pshazz_path {
-	return $pwd -replace [regex]::escape((resolve-path ~)), "~"
+	return $pwd -replace [regex]::escape($home), "~"
 }
 
 function global:pshazz_write_prompt($prompt, $vars) {
