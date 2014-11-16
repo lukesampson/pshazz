@@ -1,0 +1,32 @@
+{
+	"plugins": [ "git", "hg", "ssh", "z", "aliases", "dircolors" ],
+	"dircolors": {
+		"dirs": [
+			[".*", "cyan", ""]
+		],
+		"files": [
+		    ["(?ix).(7z|zip|tar|gz|rar)$",                        "darkcyan",   ""],
+		    ["(?ix).(exe|bat|cmd|py|pl|ps1|psm1|vbs|rb|reg)$",    "darkgreen",  ""],
+		    ["(?ix).(doc|docx|ppt|pptx|xls|xlsx|mdb|mdf|ldf)$",   "magenta",    ""],
+		    ["(?ix).(txt|cfg|conf|config|yml|ini|csv|log|json)$", "darkyellow", ""],
+		    ["(?ix).(sln|csproj|sqlproj|proj|targets)$",          "darkred",    ""],
+		    [".*",                                                "darkgray",   ""]
+		]
+	},
+	"prompt": [
+		[ "cyan",  "", "$path" ],
+		[ "red",   "", "$git_lbracket$git_branch$git_dirty$git_rbracket" ],
+		[ "red",   "", "$hg_lbracket$hg_branch$hg_bookmark$hg_dirty$hg_rbracket" ],
+		[ "green", "", "`n$([char]0x3BB)$([char]0x0BB)" ]
+	],
+	"git": {
+		"prompt_dirty":    "*",
+		"prompt_lbracket": " [",
+		"prompt_rbracket": "]"
+	},
+	"hg": {
+		"prompt_dirty":    "*",
+		"prompt_lbracket": " [",
+		"prompt_rbracket": "]"
+	}
+}
