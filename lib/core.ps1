@@ -2,6 +2,11 @@ function fullpath($path) {
 	$executionContext.sessionState.path.getUnresolvedProviderPathFromPSPath($path)
 }
 
+function friendly_path($path) {
+	$h = $home; if(!$h.endswith('\')) { $h += '\' }
+	return "$path" -replace ([regex]::escape($h)), "~\"
+}
+
 function hashtable($obj) {
 	$h = @{ }
 	$obj.psobject.properties | % {
