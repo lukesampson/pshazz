@@ -8,7 +8,7 @@ Pshazz extends your powershell profile to add things like
 * An SSH helper that lets you never enter your private key password again
 * Sensible aliases, and an easy way to add your own aliases and remove ones you don't like
 
-Pshazz is designed to work with themes, so you can create your own [theme](wiki/Themes) if the defaults aren't quite what you want. Make sure to send a pull request to include your theme with pshazz if you come up with something cool!
+Pshazz is designed to work with themes, so you can create your own [theme](https://github.com/lukesampson/pshazz/wiki/Themes) if the defaults aren't quite what you want. Make sure to send a pull request to include your theme with pshazz if you come up with something cool!
 
 ### Installation
 Using [Scoop](http://scoop.sh):
