@@ -1,0 +1,21 @@
+{
+	"plugins": [ "git", "ssh", "z", "aliases" ],
+	"prompt": [
+		[ "Black", "DarkRed", " $time" ],
+		[ "DarkRed", "DarkBlue", "$rightarrow" ],
+		[ "Black", "DarkBlue", " $path" ],
+		[ "DarkBlue", "", "$no_git" ],
+		[ "DarkBlue", "Green", "$yes_git" ],
+		[ "", "Green", " $git_lbracket$git_branch" ],
+		[ "Red", "Green", "$git_dirty"],
+		[ "DarkGreen", "Green", " $git_insertions" ],
+		[ "DarkRed", "Green", " $git_deletions" ],
+		[ "", "Green", "$git_rbracket" ],
+		[ "Green", "", "$yes_git" ],
+		[ "", "", " `n$" ]
+	],
+	"git": {
+		"prompt_lbracket": "[",
+		"prompt_rbracket": "]"
+	}
+}
