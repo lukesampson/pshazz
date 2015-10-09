@@ -5,14 +5,14 @@ if(!(test-path $profile)) {
 }
 
 $old_init = "try { `$null = gcm pshazz -ea stop; pshazz init 'default' } catch { }"
-$new_init = "try { `$null = gcm pshazz -ea stop; pshazz init } catch { }"
+$new_init = "try { `$null = Get-Command pshazz -ea stop; pshazz init } catch { }"
 
-$text = gc $profile
+$text = Get-Content $profile
 if(($text | sls 'pshazz') -eq $null) {
 	write-host 'adding pshazz to your powershell profile'
 
 	# read and write whole profile to avoid problems with line endings and encodings
-	$new_profile = @($text) + "try { `$null = gcm pshazz -ea stop; pshazz init 'default' } catch { }"
+	$new_profile = @($text) + "try { `$null = Get-Command pshazz -ea stop; pshazz init 'default' } catch { }"
 	$new_profile > $profile
 } elseif($text -contains $old_init) {
 	write-host 'updating pshazz init in your powershell profile'

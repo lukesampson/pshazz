@@ -1,5 +1,5 @@
 function command_files {
-	gci "$psscriptroot\..\libexec" | where { $_.name -match 'pshazz-.*?\.ps1$' }
+	Get-ChildItem "$psscriptroot\..\libexec" | where { $_.name -match 'pshazz-.*?\.ps1$' }
 }
 
 function commands {

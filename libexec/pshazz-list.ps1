@@ -5,7 +5,7 @@
 . "$psscriptroot\..\lib\theme.ps1"
 
 function list_themes($dir) {
-	gci "$dir" "*.json" |% { "  $($_.name -replace '.json$', '')" }
+	Get-ChildItem "$dir" "*.json" |% { "  $($_.name -replace '.json$', '')" }
 }
 
 "Custom themes:"

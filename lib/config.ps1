@@ -13,7 +13,7 @@ function load_cfg {
 	if(!(test-path $cfgpath)) { return $null }
 	
 	try {
-		hashtable (gc $cfgpath -raw | convertfrom-json -ea stop)
+		hashtable (Get-Content $cfgpath -raw | convertfrom-json -ea stop)
 	} catch {
 		write-host "ERROR loading $cfgpath`: $($_.exception.message)"
 	}

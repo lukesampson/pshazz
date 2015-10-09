@@ -5,7 +5,7 @@
 #       already has a different purpose in SSH.
 $envfile="~/.ssh/agent.env.ps1"
 
-try { gcm ssh-agent -ea stop > $null } catch { return }
+try { Get-Command ssh-agent -ea stop > $null } catch { return }
 
 # Note: Don't bother checking SSH_AGENT_PID. It's not used
 #       by SSH itself, and it might even be incorrect
