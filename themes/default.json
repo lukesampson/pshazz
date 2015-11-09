@@ -2,14 +2,22 @@
 	"plugins": [ "git", "hg", "ssh", "z", "aliases" ],
 	"prompt": [
 		[ "cyan",  "", "$dir" ],
-		[ "red",   "", " $git_branch$git_dirty" ],
+		[ "red",   "", " $git_branch" ],
+		[ "red",   "", " $git_local_state" ],
+		[ "red",   "", " $git_remote_state" ],
 		[ "red",   "", " $hg_branch" ],
 		[ "",      "", "$hg_bookmark" ],
 		[ "red",   "", "$hg_dirty" ],
 		[ "green", "", " `$" ]
 	],
 	"git": {
-		"prompt_dirty": "*"
+		"prompt_unstaged": "*",
+		"prompt_staged": "+",
+		"prompt_stash": "$",
+		"prompt_untracked": "%",
+		"prompt_remote_push": ">",
+		"prompt_remote_pull": "<",
+		"prompt_remote_same": "=",
 	},
 	"hg": {
 		"prompt_dirty": "*"
