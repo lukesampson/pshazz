@@ -17,7 +17,7 @@
 		"prompt_untracked": "%",
 		"prompt_remote_push": ">",
 		"prompt_remote_pull": "<",
-		"prompt_remote_same": "=",
+		"prompt_remote_same": "="
 	},
 	"hg": {
 		"prompt_dirty": "*"
