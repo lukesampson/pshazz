@@ -1,3 +1,7 @@
+function global:pshazz_time {
+	return (get-date -DisplayHint time -format T)
+}
+
 function global:pshazz_dir {
 	if($pwd -like $home) { return '~' }
 
@@ -38,6 +42,7 @@ function global:prompt {
 	$saved_lastexitcode = $lastexitcode
 
 	$global:pshazz.prompt_vars = @{
+		time     = pshazz_time;
 		dir      = pshazz_dir;
 		path     = pshazz_path;
 		user     = $env:username;
