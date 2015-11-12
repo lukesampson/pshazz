@@ -6,6 +6,22 @@ function global:pshazz_dir {
 	return $dir
 }
 
+function global:pshazz_two_dir {
+	if($pwd -like $home) { return '~' }
+
+	$dir = split-path $pwd -leaf
+	$parent_pwd = split-path $pwd -parent
+	if($dir -imatch '[a-z]:\\') { return '\' }
+
+	if($parent_pwd) {
+		$parent = split-path $parent_pwd -leaf
+
+		$dir = "$parent\$dir"
+	}
+
+	return $dir
+}
+
 function global:pshazz_path {
 	return $pwd -replace [regex]::escape($home), "~"
 }
@@ -39,6 +55,7 @@ function global:prompt {
 
 	$global:pshazz.prompt_vars = @{
 		dir      = pshazz_dir;
+		two_dir  = pshazz_two_dir;
 		path     = pshazz_path;
 		user     = $env:username;
 		hostname = $env:computername;
