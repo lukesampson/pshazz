@@ -104,22 +104,25 @@ function global:pshazz:git:prompt {
 
 		# upstream state
 		try { $tracking = cmd /c "git rev-parse --abbrev-ref @{u}" } catch { } 
-		try { $remote = cmd /c "git rev-list --count --left-right $tracking...HEAD" } catch { }
 
-		$remote_array = @($remote.split());
+		if ($tracking) {
+			try { $remote = cmd /c "git rev-list --count --left-right $tracking...HEAD" } catch { }
 
-		if ($remote_array.length -eq 2) {
+			$remote_array = @($remote.split());
 
-			if ($remote_array[1] -ne 0) {
-				$vars.git_remote_state += $global:pshazz.git.prompt_remote_push;
-			}
+			if ($remote_array.length -eq 2) {
 
-			if ($remote_array[0] -ne 0) {
-				$vars.git_remote_state += $global:pshazz.git.prompt_remote_pull;
-			}
+				if ($remote_array[1] -ne 0) {
+					$vars.git_remote_state += $global:pshazz.git.prompt_remote_push;
+				}
 
-			if ($remote_array[0] -eq 0 -And $remote_array[1] -eq 0) {
-				$vars.git_remote_state += $global:pshazz.git.prompt_remote_same;
+				if ($remote_array[0] -ne 0) {
+					$vars.git_remote_state += $global:pshazz.git.prompt_remote_pull;
+				}
+
+				if ($remote_array[0] -eq 0 -And $remote_array[1] -eq 0) {
+					$vars.git_remote_state += $global:pshazz.git.prompt_remote_same;
+				}
 			}
 		}
 
