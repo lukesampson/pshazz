@@ -20,7 +20,11 @@ function global:pshazz_two_dir {
 	if($parent_pwd) {
 		$parent = split-path $parent_pwd -leaf
 
-		$dir = "$parent\$dir"
+		if( $parent -imatch '[a-z]:\\') {
+			$dir = "\$dir"
+		} else {
+			$dir = "$parent\$dir"
+		}
 	}
 
 	return $dir
