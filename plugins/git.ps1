@@ -105,7 +105,7 @@ function global:pshazz:git:prompt {
 		# upstream state
 		try { $tracking = cmd /c "git rev-parse --abbrev-ref @{u}" } catch { } 
 
-		if ($tracking) {
+		if ($tracking -And $tracking -ne "@{u}") {
 			try { $remote = cmd /c "git rev-list --count --left-right $tracking...HEAD" } catch { }
 
 			$remote_array = @($remote.split());
