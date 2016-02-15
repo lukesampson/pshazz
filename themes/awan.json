@@ -1,0 +1,34 @@
+{
+  "plugins": [ "git", "ssh", "z", "aliases", "dircolors" ],
+  "dircolors": {
+    "dirs": [
+      [".*", "gray", ""]
+    ],
+    "files": [
+        ["(?ix).(7z|zip|tar|gz|rar)$",                        "darkcyan",   ""],
+        ["(?ix).(exe|bat|cmd|py|pl|ps1|psm1|vbs|rb|reg|css)$",    "darkgreen",  ""],
+        ["(?ix).(doc|docx|ppt|pptx|xls|xlsx|mdb|mdf|ldf)$",   "magenta",    ""],
+        ["(?ix).(txt|cfg|conf|config|yml|ini|csv|log|json)$", "darkyellow", ""],
+        ["(?ix).(php)$", "darkmagenta", ""],
+        ["(?ix).(js)$", "darkblue", ""],
+        ["(?ix).(sln|csproj|sqlproj|proj|targets|html)$",          "darkred",    ""],
+        [".*",                                                "darkgray",   ""]
+    ]
+  },
+  "prompt": [
+  		[ "cyan",   "", "$([char]0x2601) " ],
+    		[ "green",  "", "$dir" ],
+    		[ "cyan",   "", " $(&{If($git_branch.Length) {'['} Else {''}})$git_branch" ],
+		[ "darkmagenta",   "", " $git_dirty" ],
+		[ "cyan",   "", " $git_local_state" ],
+		[ "cyan",   "", " $git_remote_state" ],
+		[ "cyan",   "", " $hg_branch" ],
+		[ "",      "", "$hg_bookmark" ],
+		[ "cyan",   "", "$hg_dirty$(&{If($git_branch.Length) {']'} Else {''}})" ],
+		[ "yellow",   "", " $(&{If($git_branch.Length) {$([char]0x26A1)} Else {''}})" ]
+		
+  ],
+  "git": {
+    "prompt_dirty": " [X]"
+  }
+}
