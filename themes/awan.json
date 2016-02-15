@@ -16,15 +16,16 @@
     ]
   },
   "prompt": [
-  	[ "cyan",   "", "$([char]0x2601) " ],
-    [ "green",  "", "$dir" ],
-		[ "cyan",   "", " $git_branch$git_dirty" ],
+  		[ "cyan",   "", "$([char]0x2601) " ],
+    		[ "green",  "", "$dir" ],
+    		[ "cyan",   "", " $(&{If($git_branch.Length) {'['} Else {''}})$git_branch" ],
+		[ "darkmagenta",   "", " $git_dirty" ],
 		[ "cyan",   "", " $git_local_state" ],
 		[ "cyan",   "", " $git_remote_state" ],
 		[ "cyan",   "", " $hg_branch" ],
 		[ "",      "", "$hg_bookmark" ],
-		[ "cyan",   "", "$hg_dirty" ],
-		[ "yellow",   "", " $([char]0x26A1)" ]
+		[ "cyan",   "", "$hg_dirty$(&{If($git_branch.Length) {']'} Else {''}})" ],
+		[ "yellow",   "", " $(&{If($git_branch.Length) {$([char]0x26A1)} Else {''}})" ]
 		
   ],
   "git": {
