@@ -21,7 +21,7 @@ function find_path($name) {
 
 function load_theme($path) {
 	try {
-		gc $path -raw | convertfrom-json -ea stop
+		Get-Content $path -raw | convertfrom-json -ea stop
 	} catch {
 		write-host "ERROR loading JSON for $path`: $($_.exception.message)"
 	}

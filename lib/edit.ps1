@@ -10,5 +10,5 @@ function editor {
 }
 
 function has_editor($name) {
-	try { gcm $name -ea stop; $true } catch { $false }
+	try { Get-Command $name -ea stop; $true } catch { $false }
 }

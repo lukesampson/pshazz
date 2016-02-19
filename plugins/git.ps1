@@ -1,4 +1,4 @@
-try { gcm git -ea stop > $null } catch { return }
+try { Get-Command git -ea stop > $null } catch { return }
 
 function pshazz:git:init {
 	$git = $global:pshazz.theme.git
