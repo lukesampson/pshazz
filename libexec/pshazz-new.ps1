@@ -1,4 +1,4 @@
-# Usage: pshazz new <name>
+﻿# Usage: pshazz new <name>
 # Summary: Create a new theme
 # Help: Creates a new theme and opens it in an editor.
 #

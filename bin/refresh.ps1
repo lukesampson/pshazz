@@ -1,4 +1,4 @@
-$src = resolve-path "$psscriptroot\.."
+﻿$src = resolve-path "$psscriptroot\.."
 $dest = resolve-path "$(split-path (scoop which pshazz))\.."
 
 # make sure not running from the installed directory

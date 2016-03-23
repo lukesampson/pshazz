@@ -1,4 +1,4 @@
-$cfgpath = $env:PSHAZZ_CFG, "~/.pshazz" | select -first 1
+﻿$cfgpath = $env:PSHAZZ_CFG, "~/.pshazz" | select -first 1
 
 function to_hashtable($obj) {
 	$ht = @{}
@@ -11,7 +11,7 @@ function to_hashtable($obj) {
 
 function load_cfg {
 	if(!(test-path $cfgpath)) { return $null }
-	
+
 	try {
 		hashtable (gc $cfgpath -raw | convertfrom-json -ea stop)
 	} catch {

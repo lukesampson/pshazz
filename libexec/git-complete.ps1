@@ -1,6 +1,6 @@
-# Based on Keith Dahlby's GitTabExpansion.ps1 from PoshGit
+﻿# Based on Keith Dahlby's GitTabExpansion.ps1 from PoshGit
 # https://github.com/dahlbyk/posh-git
-# 
+#
 # Initial implementation by Jeremy Skinner
 # http://www.jeremyskinner.co.uk/2010/03/07/using-git-with-windows-powershell/
 param($fragment) # everything after ^git\s*
@@ -91,7 +91,7 @@ function gitFiles($filter, $files) {
 # returns an array of files changes, where the file change is
 # an array of (x,y,path1,path2). see `git help status` for meanings
 function gitStatus {
-	git -c color.status=false status --short 2>$null | sls '^(.)(.) (.*?)(?: -> (.*))?$' | % {        
+	git -c color.status=false status --short 2>$null | sls '^(.)(.) (.*?)(?: -> (.*))?$' | % {
 		$_all, $groups = $_.matches.groups; # discard group 0 (complete match)
 		,($groups | % { $_.value })         # ',' forces array of arrays
 	}

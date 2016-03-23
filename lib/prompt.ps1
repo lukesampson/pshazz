@@ -1,4 +1,4 @@
-function global:pshazz_time {
+﻿function global:pshazz_time {
 	return (get-date -DisplayHint time -format T)
 }
 
@@ -77,7 +77,7 @@ function global:prompt {
 			& $prompt_fn
 		}
 	}
-	
+
 	pshazz_write_prompt $global:pshazz.theme.prompt $global:pshazz.prompt_vars
 
 	$global:lastexitcode = $saved_lastexitcode

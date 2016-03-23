@@ -1,4 +1,4 @@
-# Usage: pshazz edit <name>
+﻿# Usage: pshazz edit <name>
 # Summary: Edit a theme
 
 param($name)

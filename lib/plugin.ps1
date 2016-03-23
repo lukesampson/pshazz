@@ -1,4 +1,4 @@
-$plugindir = fullpath "$psscriptroot\..\plugins"
+﻿$plugindir = fullpath "$psscriptroot\..\plugins"
 
 function plugin:init($name) {
     $path = "$plugindir\$name.ps1"

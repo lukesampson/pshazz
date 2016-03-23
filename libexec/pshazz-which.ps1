@@ -1,4 +1,4 @@
-# Usage: pshazz which <name>
+﻿# Usage: pshazz which <name>
 # Summary: Print the theme's path
 
 param($name)

@@ -1,4 +1,4 @@
-{
+﻿{
   "plugins": [ "git", "ssh", "z", "aliases", "dircolors" ],
   "dircolors": {
     "dirs": [

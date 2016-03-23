@@ -1,4 +1,4 @@
-# Usage: pshazz help <command>
+﻿# Usage: pshazz help <command>
 # Summary: Show help for a command
 param($cmd)
 

@@ -1,4 +1,4 @@
-# resets the console foreground color if a program changes it
+﻿# resets the console foreground color if a program changes it
 function pshazz:resetcolor:init {
 	$global:pshazz:resetcolor:fg = $host.ui.rawui.foregroundcolor
 	$global:pshazz:resetcolor:bg = $host.ui.rawui.backgroundcolor

@@ -1,4 +1,4 @@
-# Imports [z.ps](https://github.com/JannesMeyer/z.ps)
+﻿# Imports [z.ps](https://github.com/JannesMeyer/z.ps)
 
 Import-Module "$plugindir\z"
 Set-Alias z Search-NavigationHistory -Scope "global"

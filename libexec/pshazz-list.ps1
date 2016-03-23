@@ -1,4 +1,4 @@
-# Usage: pshazz list
+﻿# Usage: pshazz list
 # Summary: List available themes
 
 . "$psscriptroot\..\lib\core.ps1"

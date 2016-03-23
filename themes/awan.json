@@ -1,4 +1,4 @@
-{
+﻿{
   "plugins": [ "git", "ssh", "z", "aliases", "dircolors" ],
   "dircolors": {
     "dirs": [
@@ -26,7 +26,7 @@
 		[ "",      "", "$hg_bookmark" ],
 		[ "cyan",   "", "$hg_dirty$(&{If($git_branch.Length) {']'} Else {''}})" ],
 		[ "yellow",   "", " $(&{If($git_branch.Length) {$([char]0x26A1)} Else {''}})" ]
-		
+
   ],
   "git": {
     "prompt_dirty": " [X]"

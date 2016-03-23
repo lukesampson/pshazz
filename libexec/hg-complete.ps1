@@ -1,4 +1,4 @@
-# based on Jeremy Skinner's HgTabExpansion from Posh-Hg 
+﻿# based on Jeremy Skinner's HgTabExpansion from Posh-Hg
 # https://github.com/JeremySkinner/posh-hg
 param($fragment) # everything after ^hg\s*
 
@@ -6,11 +6,11 @@ $script:hgCommands = @()
 $script:hgflowStreams = @()
 
 function hgFiles($filter, $pattern) {
-	 hg status $(hg root) | 
-		foreach { 
-			if($_ -match "($pattern){1} (.*)") { 
-				$matches[2] 
-			} 
+	 hg status $(hg root) |
+		foreach {
+			if($_ -match "($pattern){1} (.*)") {
+				$matches[2]
+			}
 		} |
 		where { $_ -like "*$filter*" } |
 		foreach { if($_ -like '* *') {  "'$_'"  } else { $_ } }
@@ -27,31 +27,31 @@ function hgRemotes($filter) {
 	}
 }
 
-# By default the hg command list is populated the first time hgCommands is invoked. 
-# Invoke PopulateHgCommands in your profile if you don't want the initial hit. 
+# By default the hg command list is populated the first time hgCommands is invoked.
+# Invoke PopulateHgCommands in your profile if you don't want the initial hit.
 function hgCommands($filter) {
 	if($script:hgCommands.Length -eq 0) {
 		populateHgCommands
 	}
 
 	if($filter) {
-		 $hgCommands | ? { $_.StartsWith($filter) } | % { $_.Trim() } | sort  
+		 $hgCommands | ? { $_.StartsWith($filter) } | % { $_.Trim() } | sort
 	}
 	else {
 		$hgCommands | % { $_.Trim() } | sort
 	}
 }
 
-# By default the hg command list is populated the first time hgCommands is invoked. 
-# Invoke PopulateHgCommands in your profile if you don't want the initial hit. 
+# By default the hg command list is populated the first time hgCommands is invoked.
+# Invoke PopulateHgCommands in your profile if you don't want the initial hit.
 function PopulateHgCommands() {
 	 $hgCommands = foreach($cmd in (hg help)) {
-		# Stop once we reach the "Enabled Extensions" section of help. 
+		# Stop once we reach the "Enabled Extensions" section of help.
 		# Not sure if there's a better way to do this...
 		if($cmd -eq "enabled extensions:") {
 			break
 		}
-		
+
 		if($cmd -match '^ (\S+) (.*)') {
 				$matches[1]
 		 }
@@ -65,7 +65,7 @@ function PopulateHgCommands() {
 			 }
 		}
 	}
-	
+
 	$script:hgCommands = $hgCommands
 }
 
@@ -103,7 +103,7 @@ function hgLocalTags($filter) {
 
 function bookmarkName($bookmark) {
 		$split = $bookmark.Split(" ");
-				
+
 		if($bookmark.StartsWith("*")) {
 				$split[1]
 		}
@@ -115,7 +115,7 @@ function bookmarkName($bookmark) {
 function hgLocalBookmarks($filter) {
 	hg bookmarks --quiet | foreach {
 		if($_ -match "(\S+) .*") {
-			$bookmark = bookmarkName($matches[0])  
+			$bookmark = bookmarkName($matches[0])
 			if($filter -and $bookmark.StartsWith($filter)) {
 				$bookmark
 			}
@@ -171,8 +171,8 @@ function thgCommands($filter) {
 			}
 		}
 	}
-	
-	$cmdList | sort 
+
+	$cmdList | sort
 }
 
 function hgflowStreams($filter) {
@@ -186,12 +186,12 @@ function hgflowStreams($filter) {
 				populatehgflowStreams($hgflow)
 			}
 		}
-		
+
 		$script:hgflowStreams = $script:hgflowStreams
 	}
-	
+
 	if($filter) {
-		 $hgflowStreams | ? { $_.StartsWith($filter) } | % { $_.Trim() } | sort  
+		 $hgflowStreams | ? { $_.StartsWith($filter) } | % { $_.Trim() } | sort
 	}
 	else {
 		$hgflowStreams | % { $_.Trim() } | sort
@@ -200,7 +200,7 @@ function hgflowStreams($filter) {
 
 function populatehgflowStreams($filename) {
 	$ini = @{}
-	
+
 	switch -regex -file $filename
 	{
 		"^\[(.+)\]" # Section
@@ -214,26 +214,26 @@ function populatehgflowStreams($filename) {
 			$ini[$section] += $name
 		}
 	}
-	
+
 	# Supporting by 0.4 and 0.9 files
 	$script:hgflowStreams = if ($ini["Basic"]) { $ini["Basic"] } else { $ini["branchname"] }
 }
 
-switch -regex ($fragment) { 		
-		
+switch -regex ($fragment) {
+
 	#handles hg update <branch name>
 	#handles hg merge <branch name>
 	'^(up|update|merge|co|checkout) (\S*)$' {
 		findBranchOrBookmarkOrTags($matches[2])
 	}
-			 
-	#Handles hg pull -B <bookmark>   
+
+	#Handles hg pull -B <bookmark>
 	'^pull (-\S* )*-(B) (\S*)$' {
 		hgRemoteBookmarks($matches[3])
 		hgLocalBookmarks($matches[3])
 	}
 
-	#Handles hg push -B <bookmark>   
+	#Handles hg push -B <bookmark>
 	'^push (-\S* )*-(B) (\S*)$' {
 		hgLocalBookmarks($matches[3])
 	}
@@ -242,7 +242,7 @@ switch -regex ($fragment) {
 	'^(book|bookmark) (\S*)$' {
 		hgLocalBookmarks($matches[2])
 	}
-	
+
 	#Handles hg push <path>
 	#Handles hg pull <path>
 	#Handles hg outgoing <path>
@@ -250,7 +250,7 @@ switch -regex ($fragment) {
 	'^(push|pull|outgoing|incoming) (-\S* )*(\S*)$' {
 		hgRemotes($matches[3])
 	}
-	
+
 	#handles hg help <cmd>
 	#handles hg <cmd>
 	'^(help )?(\S*)$' {
@@ -261,32 +261,32 @@ switch -regex ($fragment) {
 	'^(\S+) (-\S* )*--(\S*)$' {
 		hgOptions $matches[1] $matches[3];
 	}
-	
+
 	#handles hg revert <path>
 	'^revert (\S*)$' {
 		hgFiles $matches[1] 'M|A|R|!'
 	}
-	
+
 	#handles hg add <path>
 	'^add (\S*)$' {
 		hgFiles $matches[1] '\?'
 	}
-	
+
 	# handles hg diff <path>
 	'^diff (\S*)$' {
 		hgFiles $matches[1] 'M'
 	}
-	
+
 	# handles hg commit -(I|X) <path>
 	'^commit (\S* )*-(I|X) (\S*)$' {
 		hgFiles $matches[3] 'M|A|R|!'
 	}
-	
+
 	#handles hg flow * <branch name>
 	'^flow (feature|release|hotfix|support) (\S*)$' {
 		findBranchOrBookmarkOrTags($matches[1]+"/"+$matches[2])
 	}
-	
+
 	#handles hg flow *
 	'^flow (\S*)$' {
 		hgflowStreams($matches[1])
