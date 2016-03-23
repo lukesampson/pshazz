@@ -1,4 +1,4 @@
-$cfgpath = "~/.pshazz"
+$cfgpath = $env:PSHAZZ_CFG, "~/.pshazz" | select -first 1
 
 function to_hashtable($obj) {
 	$ht = @{}

@@ -14,6 +14,9 @@ if(!$name) { "<name> is required"; my_usage; exit 1 }
 $path = "$user_themedir\$name.json"
 
 if(!(test-path $path)) {
+    if(!(test-path $user_themedir)) {
+        $null = mkdir $user_themedir
+    }
 	# see if it's a default theme, and copy it if it is
 	if(test-path "$themedir\$name.json") {
 		cp "$themedir\$name.json" $path
