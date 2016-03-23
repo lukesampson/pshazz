@@ -1,4 +1,4 @@
-# Usage: pshazz get <url>
+﻿# Usage: pshazz get <url>
 # Summary: Get a pshazz theme from a URL
 
 param($url)

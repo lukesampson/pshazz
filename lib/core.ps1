@@ -1,4 +1,4 @@
-function fullpath($path) {
+﻿function fullpath($path) {
 	$executionContext.sessionState.path.getUnresolvedProviderPathFromPSPath($path)
 }
 
@@ -10,7 +10,7 @@ function friendly_path($path) {
 function hashtable($obj) {
 	$h = @{ }
 	$obj.psobject.properties | % {
-		$h[$_.name] = hashtable_val $_.value		
+		$h[$_.name] = hashtable_val $_.value
 	}
 	return $h
 }

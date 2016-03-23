@@ -1,7 +1,7 @@
-function pshazz:dircolors:init {
+﻿function pshazz:dircolors:init {
   if (!$global:pshazz_dircolors_iswrapped) {
-  	wrap_command out-default -Process {
-      if ($global:pshazz.theme.dircolors) { 
+	wrap_command out-default -Process {
+      if ($global:pshazz.theme.dircolors) {
         if(($_ -is [system.io.directoryinfo]) -or ($_ -is [system.io.fileinfo])) {
           $item = $_
 
@@ -47,7 +47,7 @@ function global:pshazz:dircolors:write_item($item, $fg = $Host.ui.RawUI.Foregrou
       "", `
       $item.Name + "/" `
     ) -ForegroundColor $fg -BackgroundColor $bg
-  } 
+  }
   elseif ($item -is [System.IO.FileInfo]) {
     write-host `
     ( `

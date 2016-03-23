@@ -1,4 +1,4 @@
-# tab completion
+﻿# tab completion
 function global:tabExpansion($line, $lastWord) {
 	$expression = [regex]::split($line, '[|;]')[-1].trimstart()
 

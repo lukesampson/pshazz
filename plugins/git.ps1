@@ -1,4 +1,4 @@
-try { gcm git -ea stop > $null } catch { return }
+﻿try { gcm git -ea stop > $null } catch { return }
 
 function pshazz:git:init {
 	$git = $global:pshazz.theme.git
@@ -103,7 +103,7 @@ function global:pshazz:git:prompt {
 		}
 
 		# upstream state
-		try { $tracking = cmd /c "git rev-parse --abbrev-ref @{u}" } catch { } 
+		try { $tracking = cmd /c "git rev-parse --abbrev-ref @{u}" } catch { }
 
 		if ($tracking -And $tracking -ne "@{u}") {
 			try { $remote = cmd /c "git rev-list --count --left-right $tracking...HEAD" } catch { }

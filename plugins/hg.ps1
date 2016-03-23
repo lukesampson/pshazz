@@ -1,4 +1,4 @@
-try { gcm hg -ea stop > $null } catch { return }
+﻿try { gcm hg -ea stop > $null } catch { return }
 
 function pshazz:hg:init {
 	$hg = $global:pshazz.theme.hg

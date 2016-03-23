@@ -1,4 +1,4 @@
-# Usage: pshazz use <theme>
+﻿# Usage: pshazz use <theme>
 # Summary: Change the current theme
 # Help: This command will configure pshazz to use the specified theme.
 #

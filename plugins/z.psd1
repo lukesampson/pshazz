@@ -1,4 +1,4 @@
-@{
+﻿@{
 	ModuleVersion = '1.0'
 	Author = 'Jannes Meyer'
 	Description = 'Jump to your favorite directories'

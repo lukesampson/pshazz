@@ -1,4 +1,4 @@
-# Usage: pshazz rm <name>
+﻿# Usage: pshazz rm <name>
 # Summary: Remove a custom theme
 param($name)
 

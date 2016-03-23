@@ -1,4 +1,4 @@
-# fixes some insane powershell aliases that interfere with real programs
+﻿# fixes some insane powershell aliases that interfere with real programs
 # also adds some commonly used aliases
 # you can specify more aliases to add and remove in the theme under aliases.rm and aliases.add
 $remove = 'curl', 'wget', 'r'
@@ -42,7 +42,7 @@ function add_alias_with_params($alias, $cmd) {
 		# has input parameters
 		$alias, $in_param = $m.matches.groups[1..2] |% { $_.value }
 	}
-	
+
 	$fn_body = $cmd
 	if($in_param) {
 		$fn_body = "param$in_param $fn_body"

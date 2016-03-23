@@ -1,4 +1,4 @@
-function command_files {
+﻿function command_files {
 	gci "$psscriptroot\..\libexec" | where { $_.name -match 'pshazz-.*?\.ps1$' }
 }
 

@@ -1,4 +1,4 @@
-$known_editors = "vim", "nano", "notepad2", "notepad++", "notepad"
+﻿$known_editors = "vim", "nano", "notepad2", "notepad++", "notepad"
 
 function editor {
 	$editor = get_config 'editor'

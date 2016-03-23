@@ -1,4 +1,4 @@
-# Usage: pshazz init
+﻿# Usage: pshazz init
 # Summary: Initialize pshazz
 # Help: Usually this is called from your PS profile.
 #

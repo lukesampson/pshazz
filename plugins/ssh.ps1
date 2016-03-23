@@ -1,4 +1,4 @@
-# based on script from here:
+﻿# based on script from here:
 # https://help.github.com/articles/working-with-ssh-key-passphrases#platform-windows
 
 # Note: ~/.ssh/environment should not be used, as it

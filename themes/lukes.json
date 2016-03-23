@@ -1,4 +1,4 @@
-{
+﻿{
 	"plugins": [ "git", "hg", "ssh", "z", "aliases" ],
 	"prompt": [
 		[ "cyan",  "", "$dir" ],
