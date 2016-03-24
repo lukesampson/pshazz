@@ -13,7 +13,7 @@ function pshazz:aliases:init {
 		# may need to execute the rm many times in parent scopes until really removed
 		# (set-alias -option allscope copies the alias to child scopes)
 		while(test-path "alias:$_") {
-			rm "alias:\$_"
+			Remove-Item "alias:\$_" -force
 		}
 	}
 
