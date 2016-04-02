@@ -28,7 +28,7 @@ function hashtable_val($obj) {
 		}
 		return ,$arr
 	}
-	if($obj.gettype().name -eq 'pscustomobject') { # -is is unreliable
+	if($obj -and $obj.gettype().name -eq 'pscustomobject') { # -is is unreliable
 		return hashtable $obj
 	}
 	return $obj # assume primitive
