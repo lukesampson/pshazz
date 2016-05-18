@@ -64,6 +64,7 @@ function global:pshazz:git:prompt {
 
 		if($status) {
 			$vars.git_dirty = $global:pshazz.git.prompt_dirty
+			$vars.yes_git = ([char]0xe0b0);
 
 			$status | forEach {
 				$item_array = $_.Split(" ")
@@ -128,5 +129,7 @@ function global:pshazz:git:prompt {
 			}
 		}
 
+	} else {
+		$vars.no_git = ([char]0xe0b0);
 	}
 }

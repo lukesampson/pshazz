@@ -77,7 +77,6 @@ function global:prompt {
 		user     = $env:username;
 		hostname = $env:computername;
 		rightarrow = pshazz_rightarrow;
-		time	 = pshazz_time;
 	}
 
 	# get plugins to populate prompt vars
