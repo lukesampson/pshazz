@@ -47,6 +47,7 @@ function global:pshazz:git:prompt {
 
 	try { $ref = git symbolic-ref HEAD } catch { }
 	if($ref) {
+		$vars.yes_git = ([char]0xe0b0);
 		$vars.git_local_state = ""
 		$vars.git_remote_state = ""
 
@@ -128,5 +129,7 @@ function global:pshazz:git:prompt {
 			}
 		}
 
+	} else {
+		$vars.no_git = ([char]0xe0b0);
 	}
 }

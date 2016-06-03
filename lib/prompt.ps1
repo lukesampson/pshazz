@@ -34,6 +34,14 @@ function global:pshazz_path {
 	return $pwd -replace [regex]::escape($home), "~"
 }
 
+function global:pshazz_rightarrow {
+	return ([char]0xe0b0)
+}
+
+function global:pshazz_time {
+	return (get-date -DisplayHint time -format T)
+}
+
 function global:pshazz_write_prompt($prompt, $vars) {
 	$vars.keys | % { set-variable $_ $vars[$_] }
 	function eval($str) {
@@ -68,6 +76,7 @@ function global:prompt {
 		path     = pshazz_path;
 		user     = $env:username;
 		hostname = $env:computername;
+		rightarrow = pshazz_rightarrow;
 	}
 
 	# get plugins to populate prompt vars
