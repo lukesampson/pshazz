@@ -47,6 +47,7 @@ function global:pshazz:git:prompt {
 
 	try { $ref = git symbolic-ref HEAD } catch { }
 	if($ref) {
+		$vars.yes_git = ([char]0xe0b0);
 		$vars.git_local_state = ""
 		$vars.git_remote_state = ""
 
@@ -64,7 +65,6 @@ function global:pshazz:git:prompt {
 
 		if($status) {
 			$vars.git_dirty = $global:pshazz.git.prompt_dirty
-			$vars.yes_git = ([char]0xe0b0);
 
 			$status | forEach {
 				$item_array = $_.Split(" ")
