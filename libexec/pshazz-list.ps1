@@ -8,8 +8,12 @@ function list_themes($dir) {
 	gci "$dir" "*.json" |% { "  $($_.name -replace '.json$', '')" }
 }
 
-"Custom themes:"
-list_themes $user_themedir
-
 "Default themes:"
 list_themes $themedir
+
+"Custom themes:"
+if(Test-Path $user_themedir) {
+	list_themes $user_themedir
+} else {
+    ""
+}
