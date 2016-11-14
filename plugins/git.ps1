@@ -51,6 +51,8 @@ function global:pshazz:git:prompt {
 		$vars.git_local_state = ""
 		$vars.git_remote_state = ""
 
+		$vars.is_git = $true
+
 		$vars.git_lbracket = $global:pshazz.git.prompt_lbracket
 		$vars.git_rbracket = $global:pshazz.git.prompt_rbracket
 

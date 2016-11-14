@@ -55,6 +55,20 @@ function global:pshazz_write_prompt($prompt, $vars) {
 	# that evaluate to blank strings
 	$prompt | % {
 		$str = eval $_[2]
+
+		# check if there is additional conditional parameter for prompt part
+		if($_.Count -ge 4) {
+			$cond = eval $_[3]
+			$condition = ([string]::isnullorwhitespace($_[3]) -or $cond)
+		} else {
+			$condition = $true
+		}
+
+		# empty up the prompt part if condition fails
+		if(!$condition) {
+			$str = ""
+		}
+
 		if(![string]::isnullorwhitespace($str)) {
 			$fg = $_[0]; $bg = $_[1]
 			if(!$fg) { $fg = $fg_default }

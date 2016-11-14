@@ -1,0 +1,20 @@
+﻿{
+	"plugins": [ "git", "hg", "ssh", "z", "aliases" ],
+	"prompt": [
+		[ "",   "", "┌—", "" ],
+		[ "darkgreen",   "", " $user@$hostname", "$true" ],
+		[ "darkyellow",  "", " $pwd", "" ],
+		[ "",            "", " `n├— git —→", "$is_git" ],
+		[ "",            "", " $git_lbracket$git_branch", "" ],
+		[ "red",         "", " $git_dirty", "" ],
+		[ "",            "", "$git_rbracket", ""],
+		[ "",            "", " $hg_lbracket$hg_branch$hg_bookmark", "" ],
+		[ "red",         "", "$hg_dirty", "" ],
+		[ "",            "", "$hg_rbracket", "" ],
+		[ "",            "", "`n└———→", "" ]
+	],
+	"git": {
+		"prompt_lbracket": "[",
+		"prompt_rbracket": "]"
+	}
+}
