@@ -27,6 +27,8 @@ function global:pshazz:hg:prompt {
 		$vars.hg_lbracket = $global:pshazz.hg.prompt_lbracket
 		$vars.hg_rbracket = $global:pshazz.hg.prompt_rbracket
 
+		$vars.is_hg = $true;
+
 		$vars.hg_branch = $branch
 		try { $status = hg status } catch { }
 		if($status) {
