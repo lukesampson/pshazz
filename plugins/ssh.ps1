@@ -63,4 +63,6 @@ function pshazz:ssh:init {
 	} elseif(!(agent_has_keys)) {
 		add_keys
 	}
+
+	$global:pshazz.completions.ssh = resolve-path "$psscriptroot\..\libexec\ssh-complete.ps1"
 }
