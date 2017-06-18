@@ -1,0 +1,33 @@
+﻿{
+  "comment": "
+	--------------------------------------------
+	Crumzor defaults (User@Hostname:Path SCM $).
+	--------------------------------------------
+	",
+  "plugins": ["git", "hg", "ssh", "z", "aliases"],
+  "prompt": [
+    ["darkcyan","","$user"],
+    ["gray","","@"],
+    ["gray","","$hostname"],
+    ["yellow","",":"],
+    ["darkgray","","$path"],
+    ["red",""," $git_branch"],
+    ["red",""," $git_local_state"],
+    ["red",""," $git_remote_state"],
+    ["red",""," $hg_branch"],
+    ["","","$hg_bookmark"],
+    ["red","","$hg_dirty"],
+    ["yellow",""," `$"]
+  ],"git": {
+    "prompt_unstaged": "*",
+    "prompt_staged": "+",
+    "prompt_stash": "$",
+    "prompt_untracked": "%",
+    "prompt_remote_push": ">",
+    "prompt_remote_pull": "<",
+    "prompt_remote_same": "="
+  },
+  "hg": {
+    "prompt_dirty": "*"
+  }
+}
