@@ -43,23 +43,6 @@ function pshazz:git:init {
 }
 
 # Based on posh-git
-function global:pshazz:git:local_or_parent_path($path) {
-	$check_in = Get-Item -Force .
-	if ($check_in.PSProvider.Name -ne 'FileSystem') {
-		return $null
-	}
-	while ($check_in -ne $NULL) {
-		$path_to_test = [System.IO.Path]::Combine($check_in.fullname, $path)
-		if (Test-Path -LiteralPath $path_to_test) {
-			return $check_in.fullname
-		} else {
-			$check_in = $check_in.parent
-		}
-	}
-	return $null
-}
-
-# Based on posh-git
 function global:pshazz:git:git_branch($git_dir) {
 	$r = ''; $b = ''; $c = ''
 	if (Test-Path $git_dir\rebase-merge\interactive) {
@@ -105,7 +88,7 @@ function global:pshazz:git:git_branch($git_dir) {
 function global:pshazz:git:prompt {
 	$vars = $global:pshazz.prompt_vars
 
-	$git_root = pshazz:git:local_or_parent_path .git
+	$git_root = pshazz_local_or_parent_path .git
 
 	if ($git_root) {
 
