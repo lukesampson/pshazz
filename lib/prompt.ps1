@@ -42,6 +42,24 @@ function global:pshazz_time {
 	return (get-date -DisplayHint time -format T)
 }
 
+# Based on posh-git
+function global:pshazz_local_or_parent_path($path) {
+	$check_in = Get-Item -Force .
+	if ($check_in.PSProvider.Name -ne 'FileSystem') {
+		return $null
+	}
+	while ($check_in -ne $NULL) {
+		$path_to_test = [System.IO.Path]::Combine($check_in.fullname, $path)
+		if (Test-Path -LiteralPath $path_to_test) {
+			return $check_in.fullname
+		} else {
+			$check_in = $check_in.parent
+		}
+	}
+	return $null
+}
+
+
 function global:pshazz_write_prompt($prompt, $vars) {
 	$vars.keys | % { set-variable $_ $vars[$_] }
 	function eval($str) {

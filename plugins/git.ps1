@@ -1,4 +1,4 @@
-﻿try { gcm git -ea stop > $null } catch { return }
+﻿try { Get-Command git -ea stop > $null } catch { return }
 
 function pshazz:git:init {
 	$git = $global:pshazz.theme.git
@@ -42,11 +42,56 @@ function pshazz:git:init {
 	$global:pshazz.completions.git = resolve-path "$psscriptroot\..\libexec\git-complete.ps1"
 }
 
+# Based on posh-git
+function global:pshazz:git:git_branch($git_dir) {
+	$r = ''; $b = ''; $c = ''
+	if (Test-Path $git_dir\rebase-merge\interactive) {
+		$r = '|REBASE-i'
+		$b = "$(Get-Content $git_dir\rebase-merge\head-name)"
+	} elseif (Test-Path $git_dir\rebase-merge) {
+		$r = '|REBASE-m'
+		$b = "$(Get-Content $git_dir\rebase-merge\head-name)"
+	} else {
+		if (Test-Path $git_dir\rebase-apply) {
+			if (Test-Path $git_dir\rebase-apply\rebasing) {
+				$r = '|REBASE'
+			} elseif (Test-Path $git_dir\rebase-apply\applying) {
+				$r = '|AM'
+			} else {
+				$r = '|AM/REBASE'
+			}
+		} elseif (Test-Path $git_dir\MERGE_HEAD) {
+			$r = '|MERGING'
+		} elseif (Test-Path $git_dir\CHERRY_PICK_HEAD) {
+			$r = '|CHERRY-PICKING'
+		} elseif (Test-Path $git_dir\BISECT_LOG) {
+			$r = '|BISECTING'
+		}
+
+		try { $b = git symbolic-ref HEAD } catch { }
+		if (-not $b) {
+			try { $b = git rev-parse --short HEAD } catch { }
+		}
+	}
+
+	if ('true' -eq $(git rev-parse --is-inside-git-dir 2>$null)) {
+		if ('true' -eq $(git rev-parse --is-bare-repository 2>$null)) {
+			$c = 'BARE:'
+		} else {
+			$b = 'GIT_DIR!'
+		}
+	}
+
+	return "$c$($b -replace 'refs/heads/','')$r"
+}
+
 function global:pshazz:git:prompt {
 	$vars = $global:pshazz.prompt_vars
 
-	try { $ref = git symbolic-ref HEAD } catch { }
-	if($ref) {
+	$git_root = pshazz_local_or_parent_path .git
+
+	if ($git_root) {
+
 		$vars.yes_git = ([char]0xe0b0);
 		$vars.git_local_state = ""
 		$vars.git_remote_state = ""
@@ -56,7 +101,7 @@ function global:pshazz:git:prompt {
 		$vars.git_lbracket = $global:pshazz.git.prompt_lbracket
 		$vars.git_rbracket = $global:pshazz.git.prompt_rbracket
 
-		$vars.git_branch = $ref -replace '^refs/heads/', '' # branch name
+		$vars.git_branch =  pshazz:git:git_branch (Join-Path $git_root ".git")
 
 		try { $status = git status --porcelain } catch { }
 		try { $stash = git rev-parse --verify --quiet refs/stash } catch { }
@@ -68,7 +113,7 @@ function global:pshazz:git:prompt {
 		if($status) {
 			$vars.git_dirty = $global:pshazz.git.prompt_dirty
 
-			$status | forEach {
+			$status | ForEach-Object {
 				$item_array = $_.Split(" ")
 
 				if ($_.Substring(0, 2) -eq "??") {
