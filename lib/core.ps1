@@ -3,7 +3,8 @@
 }
 
 function friendly_path($path) {
-	$h = $home; if(!$h.endswith('\')) { $h += '\' }
+	$h = (Get-PsProvider 'FileSystem').home
+	if(!$h.endswith('\')) { $h += '\' }
 	return "$path" -replace ([regex]::escape($h)), "~\"
 }
 

@@ -3,7 +3,8 @@
 }
 
 function global:pshazz_dir {
-	if($pwd -like $home) { return '~' }
+	$h = (Get-PsProvider 'FileSystem').home
+	if($pwd -like $h) { return '~' }
 
 	$dir = split-path $pwd -leaf
 	if($dir -imatch '[a-z]:\\') { return '\' }
@@ -11,14 +12,20 @@ function global:pshazz_dir {
 }
 
 function global:pshazz_two_dir {
-	if($pwd -like $home) { return '~' }
+	$h = (Get-PsProvider 'FileSystem').home
+	if($pwd -like $h) { return '~' }
 
 	$dir = split-path $pwd -leaf
 	$parent_pwd = split-path $pwd -parent
 	if($dir -imatch '[a-z]:\\') { return '\' }
 
 	if($parent_pwd) {
-		$parent = split-path $parent_pwd -leaf
+		if($parent_pwd -like $h)
+		{
+			$parent = '~'
+		} else {
+			$parent = split-path $parent_pwd -leaf
+		}
 
 		if( $parent -imatch '[a-z]:\\') {
 			$dir = "\$dir"
@@ -31,7 +38,7 @@ function global:pshazz_two_dir {
 }
 
 function global:pshazz_path {
-	return $pwd -replace [regex]::escape($home), "~"
+	return $pwd -replace [regex]::escape((Get-PsProvider 'FileSystem').home), "~"
 }
 
 function global:pshazz_rightarrow {
