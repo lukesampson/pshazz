@@ -1,5 +1,5 @@
 ﻿$themedir = friendly_path (fullpath "$psscriptroot\..\themes")
-$user_themedir = $env:PSHAZZ_THEMES, "~/pshazz" | select -first 1
+$user_themedir = $env:PSHAZZ_THEMES, "$env:USERPROFILE/pshazz" | select -first 1
 
 function theme($name) {
 	$path = find_path $name

@@ -2,7 +2,7 @@
 # Summary: Initialize pshazz
 # Help: Usually this is called from your PS profile.
 #
-# When initializing, pshazz will use the theme configured in ~/.pshazz
+# When initializing, pshazz will use the theme configured in $env:USERPROFILE/.pshazz
 # or otherwise revert to the default theme.
 . "$psscriptroot\..\lib\core.ps1"
 . "$psscriptroot\..\lib\help.ps1"

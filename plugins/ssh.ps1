@@ -1,9 +1,9 @@
 ﻿# based on script from here:
 # https://help.github.com/articles/working-with-ssh-key-passphrases#platform-windows
 
-# Note: ~/.ssh/environment should not be used, as it
+# Note: $env:USERPROFILE/.ssh/environment should not be used, as it
 #       already has a different purpose in SSH.
-$envfile="~/.ssh/agent.env.ps1"
+$envfile="$env:USERPROFILE/.ssh/agent.env.ps1"
 
 try { gcm ssh-agent -ea stop > $null } catch { return }
 
@@ -38,7 +38,7 @@ function agent_start {
 	$script = $script -creplace '([A-Z_]+)=([^;]+).*', '$$env:$1="$2"' `
 		-creplace 'echo ([^;]+);', 'echo "$1"'
 
-	if(!(test-path "~/.ssh")) { mkdir "~/.ssh" > $null }
+	if(!(test-path "$env:USERPROFILE/.ssh")) { mkdir "$env:USERPROFILE/.ssh" > $null }
 
 	$script > $envfile
 	. $envfile > $null

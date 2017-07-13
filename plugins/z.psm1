@@ -80,7 +80,8 @@ function Update-NavigationHistory {
 	)
 
 	# Abort if we got $HOME
-	if ($Path -eq $HOME) {
+	$h = (Get-PsProvider 'FileSystem').home
+	if ($Path -eq $h) {
 		return
 	}
 
