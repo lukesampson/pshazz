@@ -38,17 +38,17 @@
     ],
     ["Black", "Yellow", "  \ue0a0 $git_lbracket$git_branch", "$git_dirty"],
     [
-      "DarkGreen",
+      "Black",
       "Green",
-      "$(&{If($is_git -and ! ($git_dirty)) {\" $git_local_state \"} Else {''}})"
+      "$(&{If($is_git -and ! ($git_dirty)) {' \u2713 '} Else {''}})"
     ],
-    ["DarkGreen", "Yellow", " $git_local_state", "$git_dirty"],
+    ["Red", "Yellow", "$(&{If($git_local_state -eq '*') {' \u00d7 '} Else {''}})"],
     [
-      "DarkGreen",
+      "Black",
       "Green",
       "$(&{If($is_git -and ! ($git_dirty)) {\" $git_remote_state \"} Else {''}})"
     ],
-    ["DarkGreen", "Yellow", " $git_remote_state", "$git_dirty"],
+    ["Black", "Yellow", "$(&{If($git_remote_state -eq '=') {' \u003d '} Else {''}})"],
     [
       "",
       "Green",
