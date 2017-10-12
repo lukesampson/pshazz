@@ -1,0 +1,72 @@
+﻿{
+  "plugins": ["git", "hg", "ssh", "z", "aliases", "dircolors"],
+  "dircolors": {
+    "dirs": [[".*", "cyan", ""]],
+    "files": [
+      ["(?ix).(7z|zip|tar|gz|rar)$", "darkcyan", ""],
+      [
+        "(?ix).(exe|bat|cmd|py|pl|ps1|psm1|vbs|rb|reg|md|txt|tex)$",
+        "darkgreen",
+        ""
+      ],
+      ["(?ix).(doc|docx|ppt|pptx|xls|xlsx|mdb|mdf|ldf|lock)$", "magenta", ""],
+      ["(?ix).(txt|cfg|conf|config|yml|ini|csv|log|json)$", "darkyellow", ""],
+      ["(?ix).(sln|csproj|sqlproj|proj|targets|rc|ignore)$", "red", ""],
+      ["(?ix).env.*", "white", ""],
+      [".*", "darkgray", ""]
+    ]
+  },
+  "prompt": [
+    ["", "DarkGray", " $time "],
+    ["DarkGray", "Blue", "$rightarrow"],
+    ["Black", "Blue", " $path "],
+    ["Blue", "", "$no_git"],
+    [
+      "Blue",
+      "Green",
+      "$(&{If($is_git -and ! ($git_dirty)) {\"$yes_git \"} Else {''}})"
+    ],
+    [
+      "Blue",
+      "Yellow",
+      "$(&{If($is_git -and $git_dirty) {\"$yes_git \"} Else {''}})"
+    ],
+    [
+      "Black",
+      "Green",
+      "$(&{If($is_git -and ! ($git_dirty)) {\" \ue0a0 $git_lbracket$git_branch \"} Else {''}})"
+    ],
+    ["Black", "Yellow", "  \ue0a0 $git_lbracket$git_branch", "$git_dirty"],
+    [
+      "Black",
+      "Green",
+      "$(&{If($is_git -and ! ($git_dirty)) {' \u2713 '} Else {''}})"
+    ],
+    ["Red", "Yellow", "$(&{If($git_local_state -eq '*' -and $git_dirty) {' \u00d7 '} Else {''}})"],
+    [
+      "Black",
+      "Green",
+      "$(&{If($is_git -and ! ($git_dirty)) {\" $git_remote_state \"} Else {''}})"
+    ],
+    ["Black", "Yellow", "$(&{If($git_remote_state -eq '=' -and $git_dirty) {' \u003d '} Else {''}})"],
+    [
+      "",
+      "Green",
+      "$(&{If($is_git -and ! ($git_dirty)) {\" $git_rbracket \"} Else {''}})"
+    ],
+    ["", "Yellow", "$git_rbracket", "$git_dirty"],
+    [
+      "Green",
+      "",
+      "$(&{If($is_git -and ! ($git_dirty)) {\"$yes_git\"} Else {''}})"
+    ],
+    ["Yellow", "", "$yes_git", "$git_dirty"],
+    ["", "", " $"]
+  ],
+  "git": {
+    "prompt_dirty": "*"
+  },
+  "hg": {
+    "prompt_dirty": "*"
+  }
+}
