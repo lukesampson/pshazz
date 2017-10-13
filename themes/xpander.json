@@ -1,4 +1,13 @@
 ﻿{
+  "comment": "
+	--------------------------
+	This theme requires this Consolas font patched for Powerline:
+	https://github.com/runsisi/consolas-font-for-powerline
+	You'll also have to enable it for console usage:
+	http://www.techrepublic.com/blog/windows-and-office/quick-tip-add-fonts-to-the-command-prompt/
+  The theme looks good on default powershell, but you can also check some concfg themes to get it looking the way you'd like.
+	--------------------------
+	",
   "plugins": ["git", "hg", "ssh", "z", "aliases", "dircolors"],
   "dircolors": {
     "dirs": [[".*", "cyan", ""]],
@@ -13,21 +22,21 @@
       ["(?ix).(txt|cfg|conf|config|yml|ini|csv|log|json)$", "darkyellow", ""],
       ["(?ix).(sln|csproj|sqlproj|proj|targets|rc|ignore)$", "red", ""],
       ["(?ix).env.*", "white", ""],
-      [".*", "darkgray", ""]
+      [".*", "gray", ""]
     ]
   },
   "prompt": [
-    ["", "DarkGray", " $time "],
-    ["DarkGray", "Blue", "$rightarrow"],
-    ["Black", "Blue", " $path "],
-    ["Blue", "", "$no_git"],
+    ["White", "DarkGray", " $time "],
+    ["DarkGray", "Cyan", "$rightarrow"],
+    ["Black", "Cyan", " $path "],
+    ["Cyan", "", "$no_git"],
     [
-      "Blue",
+      "Cyan",
       "Green",
       "$(&{If($is_git -and ! ($git_dirty)) {\"$yes_git \"} Else {''}})"
     ],
     [
-      "Blue",
+      "Cyan",
       "Yellow",
       "$(&{If($is_git -and $git_dirty) {\"$yes_git \"} Else {''}})"
     ],
@@ -40,7 +49,7 @@
     [
       "Black",
       "Green",
-      "$(&{If($is_git -and ! ($git_dirty)) {' \u2713 '} Else {''}})"
+      "$(&{If($is_git -and ! ($git_dirty)) {' \u25cb '} Else {''}})"
     ],
     ["Red", "Yellow", "$(&{If($git_local_state -eq '*' -and $git_dirty) {' \u00d7 '} Else {''}})"],
     [
