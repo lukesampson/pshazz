@@ -1,4 +1,13 @@
 ﻿{
+  "comment": "
+	--------------------------
+	This theme requires this Consolas font patched for Powerline:
+	https://github.com/runsisi/consolas-font-for-powerline
+	You'll also have to enable it for console usage:
+	http://www.techrepublic.com/blog/windows-and-office/quick-tip-add-fonts-to-the-command-prompt/
+  The theme looks good on default powershell, but you can also check some concfg themes to get it looking the way you'd like.
+	--------------------------
+	",
   "plugins": ["git", "hg", "ssh", "z", "aliases", "dircolors"],
   "dircolors": {
     "dirs": [[".*", "cyan", ""]],
