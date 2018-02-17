@@ -45,6 +45,7 @@ function agent_start {
 }
 
 function add_keys {
+	$env:HOME = $env:USERPROFILE # ssh-add looks for $HOME to find .ssh folder
 	$env:SSH_ASKPASS = resolve-path "$psscriptroot\..\libexec\askpass.exe"
 	$env:DISPLAY = "localhost:0.0"
 
