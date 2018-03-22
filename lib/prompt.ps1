@@ -116,6 +116,7 @@ function global:prompt {
 		user     = $env:username;
 		hostname = $env:computername;
 		rightarrow = pshazz_rightarrow;
+		lastexitcode = $lastexitcode;
 	}
 
 	# get plugins to populate prompt vars
