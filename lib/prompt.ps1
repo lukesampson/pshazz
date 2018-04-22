@@ -45,10 +45,6 @@ function global:pshazz_rightarrow {
 	return ([char]0xe0b0)
 }
 
-function global:pshazz_time {
-	return (get-date -DisplayHint time -format T)
-}
-
 # Based on posh-git
 function global:pshazz_local_or_parent_path($path) {
 	$check_in = Get-Item -Force .
