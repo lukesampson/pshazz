@@ -92,6 +92,7 @@ function global:pshazz:git:prompt {
 
 	if ($git_root) {
 
+		$vars.git_main = ([char]0xe0a0);
 		$vars.yes_git = ([char]0xe0b0);
 		$vars.git_local_state = ""
 		$vars.git_remote_state = ""
