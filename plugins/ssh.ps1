@@ -81,7 +81,7 @@ function Get-NativeSshAgent() {
             }
         }
 
-        # Ouptut error if native ssh.exe exists but without ssh-agent.service
+        # Output error if native ssh.exe exists but without ssh-agent.service
         if ($nativeSsh -and !$service) {
             Write-Host "You have Win32-OpenSSH binaries installed but missed the ssh-agent service. Please fix it." -f DarkRed
         }
@@ -138,7 +138,7 @@ function Start-NativeSshAgent([switch]$Verbose) {
 }
 
 function Start-SshAgent([switch]$Verbose) {
-    # If we're using the native Open-SSH, we can just interact with the service directly.
+    # If we're using the native OpenSSH, we can just interact with the service directly.
     if (Start-NativeSshAgent -Verbose:$Verbose) {
         return
     }
@@ -204,9 +204,5 @@ function pshazz:ssh:init {
     Start-SshAgent -Verbose:$Verbose
 
     # ssh TabExpansion
-    $scoop = Get-Command "scoop" -TotalCount 1 -ErrorAction SilentlyContinue
-    if ($scoop) {
-        $pshazzPath = Resolve-Path (Split-Path (Split-Path (scoop which pshazz)))
-        $global:pshazz.completions.ssh = "$pshazzPath\libexec\ssh-complete.ps1"
-    }
+    $global:pshazz.completions.ssh = resolve-path "$psscriptroot\..\libexec\ssh-complete.ps1"
 }
