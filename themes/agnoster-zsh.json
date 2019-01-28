@@ -1,0 +1,24 @@
+{
+	"plugins": [ "git" ],
+	"prompt": [
+		[ "white", "", " ${user}@${hostname} " ],
+		[ "black", "darkblue", "${rightarrow}" ],
+		[ "white", "darkblue", " $(($path -replace '/', '\') -replace '${HOME}/', '~/') " ],
+		[ "darkblue", "darkyellow", "${rightarrow}" ],
+		[ "white", "darkyellow", " $([text.encoding]::utf8.getstring((238,130,160)))" ],
+		[ "white", "darkyellow", " $git_branch" ],
+		[ "white", "darkyellow", " $git_local_state" ],
+		[ "white", "darkyellow", "$git_remote_state" ],
+		[ "darkyellow", "darkyellow", "${rightarrow}" ],
+		[ "darkyellow", "black", "${rightarrow}" ]
+	],
+	"git": {
+		"prompt_unstaged": "*",
+		"prompt_staged": "+",
+		"prompt_stash": "$",
+		"prompt_untracked": "%",
+		"prompt_remote_push": ">",
+		"prompt_remote_pull": "<",
+		"prompt_remote_same": "="
+	}
+}
