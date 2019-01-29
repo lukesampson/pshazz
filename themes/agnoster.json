@@ -1,28 +1,24 @@
 {
-	"comment": "
-	--------------------------
-	This theme requires this Consolas font patched for Powerline:
-	https://github.com/runsisi/consolas-font-for-powerline
-	You'll also have to enable it for console usage:
-	http://www.techrepublic.com/blog/windows-and-office/quick-tip-add-fonts-to-the-command-prompt/
-	--------------------------
-	",
-	"plugins": [ "git", "ssh", "z", "aliases" ],
+	"plugins": [ "git" ],
 	"prompt": [
-		[ "Black", "DarkRed", " $time" ],
-		[ "DarkRed", "Blue", "$rightarrow" ],
-		[ "Black", "Blue", " $path" ],
-		[ "Blue", "", "$no_git" ],
-		[ "Blue", "Green", "$yes_git" ],
-		[ "", "Green", " $git_lbracket$git_branch" ],
-		[ "DarkGreen", "Green", " $git_local_state" ],
-		[ "DarkGreen", "Green", " $git_remote_state" ],
-		[ "", "Green", "$git_rbracket" ],
-		[ "Green", "", "$yes_git" ],
-		[ "", "", " `n$" ]
+		[ "white", "", " ${user}@${hostname} " ],
+		[ "black", "darkblue", "${rightarrow}" ],
+		[ "white", "darkblue", " $(($path -replace '/', '\') -replace '${HOME}/', '~/') " ],
+		[ "darkblue", "darkyellow", "${rightarrow}" ],
+		[ "white", "darkyellow", " $([text.encoding]::utf8.getstring((238,130,160)))" ],
+		[ "white", "darkyellow", " $git_branch" ],
+		[ "white", "darkyellow", " $git_local_state" ],
+		[ "white", "darkyellow", "$git_remote_state" ],
+		[ "darkyellow", "darkyellow", "${rightarrow}" ],
+		[ "darkyellow", "black", "${rightarrow}" ]
 	],
 	"git": {
-		"prompt_lbracket": "[",
-		"prompt_rbracket": "]"
+		"prompt_unstaged": "*",
+		"prompt_staged": "+",
+		"prompt_stash": "$",
+		"prompt_untracked": "%",
+		"prompt_remote_push": ">",
+		"prompt_remote_pull": "<",
+		"prompt_remote_same": "="
 	}
 }
