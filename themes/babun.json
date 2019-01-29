@@ -1,7 +1,7 @@
 {
 	"plugins": [ "git", "ssh", "z" ],
 	"prompt": [
-		[ "blue",  "", "{ $dir }" ],
+		[ "cyan",  "", "{ $dir }" ],
 		[ "green",   "", " $git_branch" ],
 		[ "",   "", " $git_local_state" ],
 		[ "",   "", " $git_remote_state" ],
