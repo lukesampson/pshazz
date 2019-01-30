@@ -4,6 +4,10 @@
 #
 # To revert to the default theme, use 'default'. E.g.:
 #     pshazz use default
+#
+# To use a random theme for each session, use 'random'. E.g.:
+#	pshazz use random
+
 param($name)
 
 . "$psscriptroot\..\lib\core.ps1"
