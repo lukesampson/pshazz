@@ -47,7 +47,8 @@ if ($theme -eq 'random') {
 			$themes += $($_.name -replace '.json$', '') 
 		}
 	} 
-	$theme = $themes[(get-random -maximum ($themes.Length))]
+	$theme = $themes[(get-random -maximum ($themes.Length) -setseed (get-random -maximum (get-random)))]
+	"pshazz: loaded random theme $theme"
 }
 
 if(!$theme) { $theme = 'default' }
