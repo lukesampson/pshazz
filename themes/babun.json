@@ -1,0 +1,19 @@
+{
+	"plugins": [ "git", "ssh", "z" ],
+	"prompt": [
+		[ "cyan",  "", "{ $dir }" ],
+		[ "green",   "", " $git_branch" ],
+		[ "",   "", " $git_local_state" ],
+		[ "",   "", " $git_remote_state" ],
+		[ "magenta", "", " $([system.text.encoding]::utf8.getstring((194,187)))" ]
+	],
+	"git": {
+		"prompt_unstaged": "*",
+		"prompt_staged": "+",
+		"prompt_stash": "$",
+		"prompt_untracked": "%",
+		"prompt_remote_push": ">",
+		"prompt_remote_pull": "<",
+		"prompt_remote_same": "="
+	}
+}
