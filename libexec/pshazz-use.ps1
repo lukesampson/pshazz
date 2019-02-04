@@ -20,7 +20,7 @@ if(!$name) {
 	exit 1
 }
 
-if ($theme -ne 'random') {
+if ("random" -ne $name) {
 	# make sure valid theme
 	$theme = theme $name
 	if(!$theme) { "pshazz: couldn't find the theme named '$name'"; exit 1 }
