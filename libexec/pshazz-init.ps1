@@ -1,4 +1,4 @@
-﻿# Usage: pshazz init
+# Usage: pshazz init
 # Summary: Initialize pshazz
 # Help: Usually this is called from your PS profile.
 #
@@ -35,6 +35,21 @@ function init($theme_name) {
 }
 
 $theme = get_config 'theme'
+
+# get a random theme
+if ($theme -eq 'random') {
+	$themes = @()
+	gci "$themedir" "*.json" | % { 
+		$themes += $($_.name -replace '.json$', '') 
+	}
+	if(Test-Path $user_themedir) {
+		gci "$user_themedir" "*.json" | % { 
+			$themes += $($_.name -replace '.json$', '') 
+		}
+	} 
+	$theme = $themes[(get-random -maximum ($themes.Length))]
+}
+
 if(!$theme) { $theme = 'default' }
 init $theme
 
