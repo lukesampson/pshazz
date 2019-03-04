@@ -4,13 +4,14 @@
 		[ "white", "", " ${user}@${hostname} " ],
 		[ "black", "darkblue", "${rightarrow}" ],
 		[ "white", "darkblue", " $(($path -replace '/', '\') -replace '${HOME}/', '~/') " ],
-		[ "darkblue", "darkyellow", "${rightarrow}" ],
-		[ "white", "darkyellow", " $([text.encoding]::utf8.getstring((238,130,160)))" ],
-		[ "white", "darkyellow", " $git_branch" ],
-		[ "white", "darkyellow", " $git_local_state" ],
-		[ "white", "darkyellow", "$git_remote_state" ],
-		[ "darkyellow", "darkyellow", "${rightarrow}" ],
-		[ "darkyellow", "black", "${rightarrow}" ]
+		[ "darkblue", "black", "$(&{If(!$git_branch.Length) {${rightarrow}}})" ],
+		[ "darkblue", "darkyellow", "$(&{If($git_branch.Length) {${rightarrow}}})" ],
+		[ "white", "darkyellow", "$(&{If($git_branch.Length) {' ' + $([text.encoding]::utf8.getstring((238,130,160)))}})" ],
+		[ "white", "darkyellow", "$(&{If($git_branch.Length) {' ' + $git_branch}})" ],
+		[ "white", "darkyellow", "$(&{If($git_branch.Length) {' ' + $git_local_state}})" ],
+		[ "white", "darkyellow", "$(&{If($git_branch.Length) {$git_remote_state}})" ],
+		[ "darkyellow", "darkyellow", "$(&{If($git_branch.Length) {${rightarrow}}})" ],
+		[ "darkyellow", "black", "$(&{If($git_branch.Length) {${rightarrow}}})" ]
 	],
 	"git": {
 		"prompt_unstaged": "*",
