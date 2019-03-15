@@ -7,7 +7,7 @@
 		[ "green",  "", " $hostname" ],
 		[ "white",  "", " in" ],
 		[ "yellow",  "", " $($path -replace '{$HOME}\', '~\')" ],
-		[ "white",  "", " on git:" ],
+		[ "white",  "", "$(if ($git_branch) {' on git:'} else {':'})" ],
 		[ "cyan",  "", "$git_branch" ],
 		[ "white",   "", " $git_local_state" ],
 		[ "white",   "", " $git_remote_state" ],
