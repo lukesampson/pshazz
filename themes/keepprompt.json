@@ -1,12 +1,8 @@
-﻿{
-	"comment": "
-	--------------------------
-	This theme just keeps whatever prompt you already have set up in your $profile.
-	--------------------------
-	",
-	"plugins": [ "git", "hg", "ssh", "z", "aliases" ],
-	"prompt": null,
-	"git": {
-		"prompt_dirty": "*"
-	}
+{
+    "_comment": "This theme just keeps whatever prompt you already have set up in your $profile.",
+    "plugins": [ "git", "hg", "ssh", "z", "aliases" ],
+    "prompt": null,
+    "git": {
+        "prompt_dirty": "*"
+    }
 }

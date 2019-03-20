@@ -1,36 +1,29 @@
-﻿$cfgpath = $env:PSHAZZ_CFG, "$env:USERPROFILE/.pshazz" | select -first 1
-
-function to_hashtable($obj) {
-	$ht = @{}
-	$obj | gm |? { $_.membertype -eq 'noteproperty'} |% {
-		$name = $_.name
-		$ht[$name] = $obj.$name
-	}
-	return $ht
-}
+$cfgpath = $env:PSHAZZ_CFG, "${HOME}/.pshazz" | Select-Object -first 1
 
 function load_cfg {
-	if(!(test-path $cfgpath)) { return $null }
+    if (!(Test-Path $cfgpath)) {
+        return $null
+    }
 
-	try {
-		hashtable (gc $cfgpath -raw | convertfrom-json -ea stop)
-	} catch {
-		write-host "ERROR loading $cfgpath`: $($_.exception.message)"
-	}
+    try {
+        return (Get-Content $cfgpath -Raw | ConvertFrom-Json -ErrorAction Stop)
+    } catch {
+        Write-Host "ERROR loading $cfgpath`: $($_.Exception.Message)"
+    }
 }
 
 function get_config($name) {
-	return $cfg.$name
+    return $cfg.$name
 }
 
 function set_config($name, $val) {
-	if(!$cfg) {
-		$cfg = @{ $name = $val }
-	} else {
-		$cfg.$name = $val
-	}
+    if (!$cfg) {
+        $cfg = @{ $name = $val }
+    } else {
+        $cfg.$name = $val
+    }
 
-	convertto-json $cfg | out-file $cfgpath -encoding utf8
+    ConvertTo-Json $cfg | Set-Content $cfgpath -Encoding ASCII
 }
 
 $cfg = load_cfg

@@ -1,4 +1,4 @@
-$cfgpath = "$env:USERPROFILE/.gconfig"
+$cfgpath = "${HOME}/.gconfig"
 
 function Set-Bookmark (
     [string]$Key,

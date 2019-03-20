@@ -1,15 +1,19 @@
-﻿function command_files {
-	gci "$psscriptroot\..\libexec" | where { $_.name -match 'pshazz-.*?\.ps1$' }
+function command_files {
+    Get-ChildItem "$PSScriptRoot\..\libexec" | Where-Object {
+        $_.Name -match 'pshazz-.*?\.ps1$'
+    }
 }
 
 function commands {
-	command_files | % { command_name $_ }
+    command_files | ForEach-Object { command_name $_ }
 }
 
 function command_name($filename) {
-	$filename.name | sls 'pshazz-(.*?)\.ps1$' | % { $_.matches[0].groups[1].value }
+    $filename.Name | Select-String 'pshazz-(.*?)\.ps1$' | ForEach-Object {
+        $_.matches[0].groups[1].Value
+    }
 }
 
 function exec($cmd, $arguments) {
-	& "$psscriptroot\..\libexec\pshazz-$cmd.ps1" @arguments
+    & "$PSScriptRoot\..\libexec\pshazz-$cmd.ps1" @arguments
 }

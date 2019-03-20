@@ -1,28 +1,29 @@
-param($fragment) # everything after ^ssh\s*
+# everything after ^ssh\s*
+param($fragment)
 
-function sshHosts($filter) {
-	$config_file = "$env:USERPROFILE\.ssh\config"
+function Get-SshHost($filter) {
+    $sshConfig = "${HOME}/.ssh/config"
 
-	$hosts = @()
-	Get-Content $config_file | where {$_ -like "Host *"} | % {
-		$hosts += $_.Split(" ") | Select-Object -Skip 1 | Where {$_ -like "$filter*"}
-	}
+    $hosts = @()
+    Get-Content $sshConfig | Where-Object { $_ -like "Host *" } | ForEach-Object {
+        $hosts += $_.Split(" ") | Select-Object -Skip 1 | Where-Object {
+            $_ -like "$filter*"
+        }
+    }
 
-	return $hosts
+    return $hosts
 }
 
-switch -regex ($fragment) {
+switch -Regex ($fragment) {
+    # Handles ssh user@<host>
+    "^(?<user>\w+)@(?<cmd>\S*)$" {
+        Get-SshHost $matches['cmd'] | ForEach-Object {
+            return "$($matches['user'])@$_"
+        }
+    }
 
-	# Handles ssh user@<host>
-	"^(?<user>\w+)@(?<cmd>\S*)$" {
-		sshHosts $matches['cmd'] | % {
-			return "$($matches['user'])@$_"
-		}
-	}
-
-	# Handles ssh <host>
-	"^(?<cmd>\S*)$" {
-		sshHosts $matches['cmd']
-	}
-
+    # Handles ssh <host>
+    "^(?<cmd>\S*)$" {
+        Get-SshHost $matches['cmd']
+    }
 }

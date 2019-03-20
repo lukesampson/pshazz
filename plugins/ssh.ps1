@@ -4,7 +4,7 @@
 
 # Note: the agent env file is for non win32-openssh (like, cygwin/msys openssh),
 #       win32-openssh doesn't need this, it runs as system service.
-$agentEnvFile = "$env:USERPROFILE/.ssh/agent.env.ps1"
+$agentEnvFile = "$HOME/.ssh/agent.env.ps1"
 
 function Import-AgentEnv() {
     if (Test-Path $agentEnvFile) {
@@ -191,8 +191,8 @@ function Test-IsSshBinaryMissing([switch]$Verbose) {
 
 # pshazz plugin entry point
 function pshazz:ssh:init {
-    if (!(Test-Path "$env:USERPROFILE/.ssh")) {
-        New-Item "$env:USERPROFILE/.ssh" -ItemType Directory | Out-Null
+    if (!(Test-Path "$HOME/.ssh")) {
+        New-Item "$HOME/.ssh" -ItemType Directory | Out-Null
     }
 
     $ssh = $global:pshazz.theme.ssh

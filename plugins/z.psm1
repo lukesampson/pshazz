@@ -2,7 +2,7 @@
 # PowerShell port of z.sh
 #
 
-$dbfile = "$env:UserProfile\navdb.csv"
+$dbfile = "${HOME}/navdb.csv"
 
 # Tip:
 # You should combine this script with "Push-Location" and "Pop-Location"

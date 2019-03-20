@@ -1,26 +1,26 @@
 {
-	"plugins": [ "git", "ssh", "z" ],
-	"prompt": [
-		[ "yellow",  "", "`n$(if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) { '%' } else { '#' } )" ],
-		[ "cyan", "", " $user" ],
-		[ "white", "", " @" ],
-		[ "green",  "", " $hostname" ],
-		[ "white",  "", " in" ],
-		[ "yellow",  "", " $($path -replace '{$HOME}\', '~\')" ],
-		[ "white",  "", " on git:" ],
-		[ "cyan",  "", "$git_branch" ],
-		[ "white",   "", " $git_local_state" ],
-		[ "white",   "", " $git_remote_state" ],
-		[ "", "", " [$([datetime]::now.tostring(\"HH:mm:ss\"))]" ],
-		[ "magenta", "", "`n`$" ]
-	],
-	"git": {
-		"prompt_unstaged": "*",
-		"prompt_staged": "+",
-		"prompt_stash": "$",
-		"prompt_untracked": "%",
-		"prompt_remote_push": ">",
-		"prompt_remote_pull": "<",
-		"prompt_remote_same": "="
-	}
+    "plugins": [ "git", "ssh", "z" ],
+    "prompt": [
+        [ "yellow",  "", "`n$(if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) { '%' } else { '#' } )" ],
+        [ "cyan",    "", " $user" ],
+        [ "white",   "", " @" ],
+        [ "green",   "", " $hostname" ],
+        [ "white",   "", " in" ],
+        [ "yellow",  "", " $path" ],
+        [ "white",   "", "$(if ($git_branch) {' on git:'} else {':'})" ],
+        [ "cyan",    "", "$git_branch" ],
+        [ "white",   "", " $git_local_state" ],
+        [ "white",   "", " $git_remote_state" ],
+        [ "",        "", " [$([datetime]::now.tostring(\"HH:mm:ss\"))]" ],
+        [ "magenta", "", "`n`$" ]
+    ],
+    "git": {
+        "prompt_unstaged": "*",
+        "prompt_staged": "+",
+        "prompt_stash": "$",
+        "prompt_untracked": "%",
+        "prompt_remote_push": ">",
+        "prompt_remote_pull": "<",
+        "prompt_remote_same": "="
+    }
 }

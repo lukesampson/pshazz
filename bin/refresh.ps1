@@ -1,11 +1,17 @@
-﻿$src = resolve-path "$psscriptroot\.."
-$dest = resolve-path "$(split-path (scoop which pshazz))\.."
+# The refresh script is for development only
+$src = Resolve-Path "$PSScriptRoot\.."
+$dest = Resolve-Path "$(Split-Path (scoop which pshazz))\.."
 
 # make sure not running from the installed directory
-if("$src" -eq "$dest") { abort "$(strip_ext $myinvocation.mycommand.name) is for development only" }
+if ("$src" -eq "$dest") {
+    Write-Output "The refresh script is for development only."
+    return
+}
 
-'copying files...'
-robocopy $src $dest /mir /njh /njs /nfl /ndl /xd .git /xf .DS_Store manifest.json install.json
+Write-Host -NoNewline 'Copying files.'
+robocopy $src $dest /mir /njh /njs /nfl /ndl /xd .git /xf .DS_Store manifest.json install.json > $null
+Write-Host ' Done.' -f DarkGreen
 
-'reloading pshazz'
+Write-Host -NoNewline 'Reloading pshazz.'
 pshazz init
+Write-Host ' Done.' -f DarkGreen
