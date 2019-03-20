@@ -2,7 +2,7 @@
 param($fragment)
 
 function Get-SshHost($filter) {
-    $sshConfig = "$env:USERPROFILE\.ssh\config"
+    $sshConfig = "${HOME}/.ssh/config"
 
     $hosts = @()
     Get-Content $sshConfig | Where-Object { $_ -like "Host *" } | ForEach-Object {
