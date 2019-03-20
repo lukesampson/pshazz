@@ -1,7 +1,7 @@
 {
 	"plugins": [ "git" ],
 	"prompt": [
-		[ "blue", "", " $(($path -replace '/', '\') -replace '${HOME}/', '~/') " ],
+		[ "blue", "", " $path " ],
 		[ "white", "", "$([text.encoding]::utf8.getstring((206,187)))" ]
 	]
 }

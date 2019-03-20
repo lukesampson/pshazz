@@ -1,6 +1,6 @@
 {
-	"plugins": [ "git" ],
-	"prompt": [
-		[ "white", "", " `$" ]
-	]
+    "plugins": [ "git" ],
+    "prompt": [
+        [ "white", "", " `$" ]
+    ]
 }

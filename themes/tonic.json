@@ -1,27 +1,27 @@
-﻿{
-  "plugins": [ "git", "ssh", "z", "aliases", "dircolors" ],
-  "dircolors": {
-    "dirs": [
-      [".*", "cyan", ""]
+{
+    "plugins": [ "git", "ssh", "z", "aliases", "dircolors" ],
+    "dircolors": {
+        "dirs": [
+            [".*", "cyan", ""]
+        ],
+        "files": [
+            ["(?ix).(7z|zip|tar|gz|rar)$",                        "darkcyan",   ""],
+            ["(?ix).(exe|bat|cmd|py|pl|ps1|psm1|vbs|rb|reg)$",    "darkgreen",  ""],
+            ["(?ix).(doc|docx|ppt|pptx|xls|xlsx|mdb|mdf|ldf)$",   "magenta",    ""],
+            ["(?ix).(txt|cfg|conf|config|yml|ini|csv|log|json)$", "darkyellow", ""],
+            ["(?ix).(sln|csproj|sqlproj|proj|targets)$",          "darkred",    ""],
+            [".*",                                                "darkgray",   ""]
+        ]
+    },
+    "prompt": [
+        [ "white", "", "$user" ],
+        [ "red",   "", " at "],
+        [ "white", "", "$hostname"],
+        [ "red",   "", " in "],
+        [ "cyan",  "", "$dir" ],
+        [ "red",   "", " $git_branch$git_dirty " ]
     ],
-    "files": [
-        ["(?ix).(7z|zip|tar|gz|rar)$",                        "darkcyan",   ""],
-        ["(?ix).(exe|bat|cmd|py|pl|ps1|psm1|vbs|rb|reg)$",    "darkgreen",  ""],
-        ["(?ix).(doc|docx|ppt|pptx|xls|xlsx|mdb|mdf|ldf)$",   "magenta",    ""],
-        ["(?ix).(txt|cfg|conf|config|yml|ini|csv|log|json)$", "darkyellow", ""],
-        ["(?ix).(sln|csproj|sqlproj|proj|targets)$",          "darkred",    ""],
-        [".*",                                                "darkgray",   ""]
-    ]
-  },
-  "prompt": [
-    [ "white", "", "$user" ],
-    [ "red", "", " at "],
-    [ "white", "", "$hostname"],
-    [ "red", "", " in "],
-    [ "cyan",  "", "$dir" ],
-    [ "red",   "", " $git_branch$git_dirty " ]
-  ],
-  "git": {
-    "prompt_dirty": " [X]"
-  }
+    "git": {
+        "prompt_dirty": " [X]"
+    }
 }

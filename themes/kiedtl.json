@@ -1,12 +1,12 @@
 {
 	"plugins": [ "git", "ssh", "z" ],
 	"prompt": [
-		[ "red",	"", "`n$user" ],
+		[ "red", "", "$user" ],
 		[ "", "", "@$hostname" ],
-		[ "blue",   "", " $git_local_state" ],
-		[ "cyan",   "", " $git_remote_state" ],
-		[ "cyan",   "", " ($git_branch)" ],
-		[ "yellow",  "", " $dir" ],
+		[ "blue", "", " $git_local_state" ],
+		[ "cyan", "", " $git_remote_state" ],
+		[ "cyan", "", " ($git_branch)" ],
+		[ "yellow", "", " $dir" ],
 		[ "green", "", " `n`$" ]
 	],
 	"git": {

@@ -2,10 +2,10 @@
 	"plugins": [ "git", "ssh", "z", "aliases" ],
 	"prompt": [
 		[ "darkred", "", "" ],
-		[ "green",  "", " $(($path -replace '/', '\') -replace '${HOME}/', '~/')" ],
-		[ "",   "", " $git_branch" ],
-		[ "",   "", " $git_local_state" ],
-		[ "",   "", " $git_remote_state" ],
+		[ "green", "", " $path" ],
+		[ "", "", " $git_branch" ],
+		[ "", "", " $git_local_state" ],
+		[ "", "", " $git_remote_state" ],
 		[ "yellow", "", " $([text.encoding]::utf8.getstring((206,187)))" ]
 	],
 	"git": {
