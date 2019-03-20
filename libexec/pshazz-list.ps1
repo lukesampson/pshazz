@@ -1,9 +1,6 @@
 # Usage: pshazz list
 # Summary: List available themes
 
-. "$PSScriptRoot\..\lib\core.ps1"
-. "$PSScriptRoot\..\lib\theme.ps1"
-
 function list_themes($dir) {
     $themes = @()
 

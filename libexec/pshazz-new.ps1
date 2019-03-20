@@ -5,18 +5,15 @@
 # The new theme will use the default theme as a template.
 param($name)
 
-. "$PSScriptRoot\..\lib\core.ps1"
-. "$PSScriptRoot\..\lib\theme.ps1"
-. "$PSScriptRoot\..\lib\edit.ps1"
-. "$PSScriptRoot\..\lib\help.ps1"
-. "$PSScriptRoot\..\lib\config.ps1"
-
-if(!$name) { "<name> is required"; my_usage; exit 1 }
+if (!$name) {
+    my_usage
+    exit 1
+}
 
 $new_path = "$user_themedir\$name.json"
 
-if(test-path $new_path) {
-    "you already have a theme named $name. use 'pshazz edit $name' to edit it";
+if (Test-Path $new_path) {
+    Write-Output "You already have a theme named $name. Type 'pshazz edit $name' to edit it."
     exit 1
 }
 
@@ -24,10 +21,11 @@ new_theme $name
 
 $editor = editor
 
-if(!$editor) {
-    "couldn't find a text editor!"; exit 1
+if (!$editor) {
+    Write-Output "Couldn't find a text editor!"
+    exit 1
 }
 
-& $editor (resolve-path $new_path)
+& $editor (Resolve-Path $new_path)
 
-"type 'pshazz use $name' when you're ready to try your theme"
+Write-Output "Type 'pshazz use $name' when you're ready to try your theme."

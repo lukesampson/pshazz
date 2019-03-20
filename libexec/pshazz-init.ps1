@@ -4,11 +4,6 @@
 #
 # When initializing, pshazz will use the theme configured in $env:USERPROFILE/.pshazz
 # or otherwise revert to the default theme.
-. "$PSScriptRoot\..\lib\core.ps1"
-. "$PSScriptRoot\..\lib\help.ps1"
-. "$PSScriptRoot\..\lib\theme.ps1"
-. "$PSScriptRoot\..\lib\plugin.ps1"
-. "$PSScriptRoot\..\lib\config.ps1"
 
 function init($theme_name) {
     $theme = theme $theme_name

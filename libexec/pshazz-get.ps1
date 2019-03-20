@@ -3,10 +3,6 @@
 
 param($url)
 
-. "$PSScriptRoot\..\lib\core.ps1"
-. "$PSScriptRoot\..\lib\help.ps1"
-. "$PSScriptRoot\..\lib\theme.ps1"
-
 if (!$url) {
     my_usage
     exit 1
