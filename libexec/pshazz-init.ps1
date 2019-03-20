@@ -2,7 +2,7 @@
 # Summary: Initialize pshazz
 # Help: Usually this is called from your PS profile.
 #
-# When initializing, pshazz will use the theme configured in $env:USERPROFILE/.pshazz
+# When initializing, pshazz will use the theme configured in ~/.pshazz
 # or otherwise revert to the default theme.
 
 function init($theme_name) {
