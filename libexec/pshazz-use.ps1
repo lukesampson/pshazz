@@ -10,20 +10,24 @@
 
 param($name)
 
-. "$psscriptroot\..\lib\core.ps1"
-. "$psscriptroot\..\lib\help.ps1"
-. "$psscriptroot\..\lib\config.ps1"
-. "$psscriptroot\..\lib\theme.ps1"
+. "$PSScriptRoot\..\lib\core.ps1"
+. "$PSScriptRoot\..\lib\help.ps1"
+. "$PSScriptRoot\..\lib\config.ps1"
+. "$PSScriptRoot\..\lib\theme.ps1"
 
-if(!$name) {
-	"using $($global:pshazz.theme_name)"
-	exit 1
+if (!$name) {
+    my_usage
+    Write-Output "`npshazz currently using '$($global:pshazz.theme_name)' theme."
+    return
 }
 
 if ("random" -ne $name) {
-	# make sure valid theme
-	$theme = theme $name
-	if(!$theme) { "pshazz: couldn't find the theme named '$name'"; exit 1 }
+    # make sure valid theme
+    $theme = theme $name
+    if (!$theme) {
+        Write-Output "pshazz: couldn't use the theme named '$name'."
+        exit 1
+    }
 }
 
 # save theme
@@ -32,4 +36,4 @@ set_config 'theme' $name
 # re-init
 pshazz init
 
-write-host "using '$name' theme"
+Write-Output "using '$name' theme"
