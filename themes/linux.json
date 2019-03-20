@@ -1,6 +1,6 @@
 {
 	"plugins": [ "ssh", "z" ],
 	"prompt": [
-		[ "white",  "", "[ ${user}:$(($path -replace '/', '\') -replace '${HOME}/', '~/') ] `$" ]
+		[ "white",  "", "[ ${user}:${path} ] `$" ]
 	]
 }

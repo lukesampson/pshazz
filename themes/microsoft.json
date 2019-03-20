@@ -1,10 +1,6 @@
-﻿{
-	"comment": "
-	--------------------------
-	Just the powershell defaults.
-	--------------------------
-	",
-	"prompt": [
-		[ "", "", "PS $pwd>" ]
-	]
+{
+    "_comment": "Just the powershell defaults.",
+    "prompt": [
+        [ "", "", "PS $pwd>" ]
+    ]
 }
