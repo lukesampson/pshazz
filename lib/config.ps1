@@ -1,4 +1,4 @@
-$cfgpath = $env:PSHAZZ_CFG, "$env:USERPROFILE\.pshazz" | Select-Object -first 1
+$cfgpath = $env:PSHAZZ_CFG, "${HOME}/.pshazz" | Select-Object -first 1
 
 function load_cfg {
     if (!(Test-Path $cfgpath)) {
