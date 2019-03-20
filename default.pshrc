@@ -1,8 +1,0 @@
-# use defined path, but put the user's path first
-# this way user can override system calls if necessary
-$userpath = [environment]::getEnvironmentVariable('path','user').trimend(';');
-$machpath = [environment]::getEnvironmentVariable('path','machine').trimstart(';');
-$env:path = "$userpath;$machpath"
-
-
-pshazz # initialize pshazz
