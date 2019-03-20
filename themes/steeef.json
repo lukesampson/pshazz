@@ -5,7 +5,7 @@
 		[ "white",  "", " at" ],
 		[ "yellow",  "", " $hostname" ],
 		[ "white",  "", " in" ],
-		[ "green",  "", " $($path -replace '{$HOME}', '~')" ],
+		[ "green",  "", " $path" ],
 		[ "white",  "", " (" ],
 		[ "cyan",  "", "$git_branch" ],
 		[ "white",   "", " $git_local_state" ],
