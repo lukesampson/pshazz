@@ -2,10 +2,6 @@
 # Summary: Remove a custom theme
 param($name)
 
-. "$PSScriptRoot\..\lib\core.ps1"
-. "$PSScriptRoot\..\lib\theme.ps1"
-. "$PSScriptRoot\..\lib\help.ps1"
-
 if (!$name) {
     my_usage
     exit 1

@@ -10,11 +10,6 @@
 
 param($name)
 
-. "$PSScriptRoot\..\lib\core.ps1"
-. "$PSScriptRoot\..\lib\help.ps1"
-. "$PSScriptRoot\..\lib\config.ps1"
-. "$PSScriptRoot\..\lib\theme.ps1"
-
 if (!$name) {
     my_usage
     Write-Output "`npshazz currently using '$($global:pshazz.theme_name)' theme."
@@ -35,5 +30,3 @@ set_config 'theme' $name
 
 # re-init
 pshazz init
-
-Write-Output "using '$name' theme"
