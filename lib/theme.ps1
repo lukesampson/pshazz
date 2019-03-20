@@ -1,5 +1,5 @@
 $themedir = fullpath "$PSScriptRoot\..\themes"
-$user_themedir = $env:PSHAZZ_THEMES, "$env:USERPROFILE\pshazz" | Select-Object -first 1
+$user_themedir = $env:PSHAZZ_THEMES, "${HOME}/pshazz" | Select-Object -first 1
 
 function theme($name) {
     $path = find_path $name
