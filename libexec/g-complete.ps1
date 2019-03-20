@@ -1,7 +1,7 @@
 # everything after ^g\s*
 param($fragment)
 
-$cfgpath = "$env:USERPROFILE\.gconfig"
+$cfgpath = "${HOME}/.gconfig"
 
 $textContent = Get-Content $cfgpath
 $inputKeys = $fragment.Split(' ')
