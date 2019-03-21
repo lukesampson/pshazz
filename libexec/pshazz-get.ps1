@@ -21,7 +21,7 @@ if (!$name) {
     exit 1
 }
 
-$path = fullpath "$user_themedir\$file"
+$path = fullpath "$userThemeDir\$file"
 
 Write-Host "downloading '$name' theme..." -nonewline
 try {

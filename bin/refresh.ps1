@@ -12,6 +12,5 @@ Write-Host -NoNewline 'Copying files.'
 robocopy $src $dest /mir /njh /njs /nfl /ndl /xd .git /xf .DS_Store manifest.json install.json > $null
 Write-Host ' Done.' -f DarkGreen
 
-Write-Host -NoNewline 'Reloading pshazz.'
+Write-Host 'Reloading pshazz.'
 pshazz init
-Write-Host ' Done.' -f DarkGreen

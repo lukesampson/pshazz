@@ -1,12 +1,10 @@
-$cfgpath = $env:PSHAZZ_CFG, "${HOME}/.pshazz" | Select-Object -first 1
-
 function load_cfg {
-    if (!(Test-Path $cfgpath)) {
+    if (!(Test-Path $configFile)) {
         return $null
     }
 
     try {
-        return (Get-Content $cfgpath -Raw | ConvertFrom-Json -ErrorAction Stop)
+        return (Get-Content $configFile -Raw | ConvertFrom-Json -ErrorAction Stop)
     } catch {
         Write-Host "ERROR loading $cfgpath`: $($_.Exception.Message)"
     }
@@ -23,7 +21,7 @@ function set_config($name, $val) {
         $cfg.$name = $val
     }
 
-    ConvertTo-Json $cfg | Set-Content $cfgpath -Encoding ASCII
+    ConvertTo-Json $cfg | Set-Content $configFile -Encoding ASCII
 }
 
 $cfg = load_cfg

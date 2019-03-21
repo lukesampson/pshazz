@@ -1,4 +1,4 @@
-Import-Module "$plugindir\g"
+Import-Module "$pluginDir\g"
 
 Set-Alias g Set-Bookmark -opt allscope -scope global
 
