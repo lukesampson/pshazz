@@ -1,6 +1,3 @@
-$themedir = fullpath "$PSScriptRoot\..\themes"
-$user_themedir = $env:PSHAZZ_THEMES, "${HOME}/pshazz" | Select-Object -first 1
-
 function theme($name) {
     $path = find_path $name
 
@@ -14,13 +11,13 @@ function theme($name) {
 
 function find_path($name) {
     # try user dir first
-    $path = "$user_themedir\$name.json"
+    $path = "$userThemeDir\$name.json"
     if (Test-Path $path) {
         return $path
     }
 
     # fallback to builtin dir
-    $path = "$themedir\$name.json"
+    $path = "$themeDir\$name.json"
     if (Test-Path $path) {
         return $path
     }
@@ -36,8 +33,8 @@ function load_theme($path) {
 }
 
 function new_theme($name) {
-    if (!(Test-Path $user_themedir)) {
-        New-Item -Path $user_themedir -ItemType Directory | Out-Null
+    if (!(Test-Path $userThemeDir)) {
+        New-Item -Path $userThemeDir -ItemType Directory | Out-Null
     }
-    Copy-Item "$themedir\default.json" "$user_themedir\$name.json"
+    Copy-Item "$themeDir\default.json" "$userThemeDir\$name.json"
 }

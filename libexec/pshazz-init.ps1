@@ -37,12 +37,12 @@ $theme = get_config 'theme'
 if ($theme -eq 'random') {
     $themes = @()
 
-    Get-ChildItem "$themedir" "*.json" | ForEach-Object {
+    Get-ChildItem "$themeDir" "*.json" | ForEach-Object {
         $themes += $($_.Name -replace '.json$', '')
     }
 
-    if (Test-Path $user_themedir) {
-        Get-ChildItem "$user_themedir" "*.json" | ForEach-Object {
+    if (Test-Path $userThemeDir) {
+        Get-ChildItem "$userThemeDir" "*.json" | ForEach-Object {
             $themes += $($_.Name -replace '.json$', '')
         }
     }

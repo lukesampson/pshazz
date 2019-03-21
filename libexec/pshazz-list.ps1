@@ -12,9 +12,9 @@ function list_themes($dir) {
 }
 
 Write-Host "Builtin themes:" -f DarkGreen
-list_themes $themedir
+list_themes $themeDir
 
-if (Test-Path $user_themedir) {
+if (Test-Path $userThemeDir) {
     Write-Host "Custom themes:" -f DarkGreen
-    list_themes $user_themedir
+    list_themes $userThemeDir
 }

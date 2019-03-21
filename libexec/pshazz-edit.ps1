@@ -8,16 +8,16 @@ if (!$name) {
     exit 1
 }
 
-$path = "$user_themedir\$name.json"
+$path = "$userThemeDir\$name.json"
 
 if (!(Test-Path $path)) {
-    if (!(Test-Path $user_themedir)) {
-        New-Item -Path $user_themedir -ItemType Directory | Out-Null
+    if (!(Test-Path $userThemeDir)) {
+        New-Item -Path $userThemeDir -ItemType Directory | Out-Null
     }
 
     # see if it's a default theme, and copy it if it is
-    if (Test-Path "$themedir\$name.json") {
-        Copy-Item "$themedir\$name.json" $path
+    if (Test-Path "$themeDir\$name.json") {
+        Copy-Item "$themeDir\$name.json" $path
     } else {
         Write-Output "pshazz: couldn't find a theme named '$name'. Type 'pshazz list' to see themes."
         exit 1
