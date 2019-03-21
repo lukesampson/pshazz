@@ -10,7 +10,7 @@ if (!$name) {
     exit 1
 }
 
-$new_path = "$user_themedir\$name.json"
+$new_path = "$userThemeDir\$name.json"
 
 if (Test-Path $new_path) {
     Write-Output "You already have a theme named $name. Type 'pshazz edit $name' to edit it."
