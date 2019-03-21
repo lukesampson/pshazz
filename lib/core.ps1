@@ -37,5 +37,6 @@ if ((Test-Path "$env:USERPROFILE\pshazz") -and !(Test-Path $userThemeDir)) {
     New-Item -Path $userThemeDir -ItemType Directory -ErrorAction Ignore | Out-Null
     Move-Item "$env:USERPROFILE\pshazz\*.json" "$userThemeDir" -Force
     Write-Host "WARNING: pshazz user themes have been migrated from '~/pshazz/' to '$userThemeDir'" -f DarkYellow
-    Remove-Item -Recurse -Force "$env:USERPROFILE\pshazz"
+    # Leave old files there
+    # Remove-Item -Recurse -Force "$env:USERPROFILE\pshazz"
 }
