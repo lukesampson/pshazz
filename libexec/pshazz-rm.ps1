@@ -7,7 +7,7 @@ if (!$name) {
     exit 1
 }
 
-$path = "$user_themedir\$name.json"
+$path = "$userThemeDir\$name.json"
 if (Test-Path $path) {
     Remove-Item $path -Force | Out-Null
     Write-Output "Removed custom theme '$name'."

@@ -38,4 +38,4 @@ if ($null -eq ($text | Select-String 'pshazz')) {
 
 & "$PSScriptRoot\pshazz" init
 
-Write-Host "Your PowerShell now is powered by pshazz!" -f DarkGreen
+Write-Host "Your PowerShell is now powered by pshazz!" -f DarkGreen
