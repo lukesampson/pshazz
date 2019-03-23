@@ -15,6 +15,11 @@ function get_config($name) {
 }
 
 function set_config($name, $val) {
+    # Ensure configFile exists
+    if (!(Test-Path $configFile)) {
+        New-Item $configFile -Force -ErrorAction Ignore | Out-Null
+    }
+
     if (!$cfg) {
         $cfg = @{ $name = $val }
     } else {
