@@ -23,7 +23,11 @@ function set_config($name, $val) {
     if (!$cfg) {
         $cfg = @{ $name = $val }
     } else {
-        $cfg.$name = $val
+        if ($null -eq $cfg.$name) {
+            $cfg | Add-Member -MemberType NoteProperty -Name $name -Value $val
+        } else {
+            $cfg.$name = $val
+        }
     }
 
     ConvertTo-Json $cfg | Set-Content $configFile -Encoding ASCII
