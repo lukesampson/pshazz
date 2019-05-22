@@ -1,19 +1,20 @@
-﻿# Usage: pshazz list
+# Usage: pshazz list
 # Summary: List available themes
 
-. "$psscriptroot\..\lib\core.ps1"
-. "$psscriptroot\..\lib\theme.ps1"
-
 function list_themes($dir) {
-	gci "$dir" "*.json" |% { "  $($_.name -replace '.json$', '')" }
+    $themes = @()
+
+    Get-ChildItem "$dir" "*.json" | ForEach-Object {
+        $themes += [System.IO.Path]::GetFileNameWithoutExtension($_.Name)
+    }
+
+    Write-Output ($themes | Format-Wide { $_ } -AutoSize -Force | Out-String).Trim()
 }
 
-"Default themes:"
-list_themes $themedir
+Write-Host "Builtin themes:" -f DarkGreen
+list_themes $themeDir
 
-"Custom themes:"
-if(Test-Path $user_themedir) {
-	list_themes $user_themedir
-} else {
-    ""
+if (Test-Path $userThemeDir) {
+    Write-Host "Custom themes:" -f DarkGreen
+    list_themes $userThemeDir
 }

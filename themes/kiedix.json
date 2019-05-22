@@ -1,20 +1,20 @@
 {
-	"plugins": [ "git", "ssh", "z", "aliases" ],
-	"prompt": [
-		[ "darkred", "", "" ],
-		[ "green",  "", " $(($path -replace '/', '\') -replace '${HOME}/', '~/')" ],
-		[ "",   "", " $git_branch" ],
-		[ "",   "", " $git_local_state" ],
-		[ "",   "", " $git_remote_state" ],
-		[ "yellow", "", " `$" ]
-	],
-	"git": {
-		"prompt_unstaged": "*",
-		"prompt_staged": "+",
-		"prompt_stash": "$",
-		"prompt_untracked": "%",
-		"prompt_remote_push": ">",
-		"prompt_remote_pull": "<",
-		"prompt_remote_same": "="
-	}
+    "plugins": ["git", "ssh", "z", "aliases"],
+    "prompt": [
+        ["darkred", "", ""],
+        ["green", "", " $path"],
+        ["", "", " $git_branch"],
+        ["", "", " $git_local_state"],
+        ["", "", " $git_remote_state"],
+        ["yellow", "", " `$"]
+    ],
+    "git": {
+        "prompt_unstaged": "*",
+        "prompt_staged": "+",
+        "prompt_stash": "$",
+        "prompt_untracked": "%",
+        "prompt_remote_push": ">",
+        "prompt_remote_pull": "<",
+        "prompt_remote_same": "="
+    }
 }

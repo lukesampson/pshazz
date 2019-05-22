@@ -4,55 +4,58 @@
 #
 # When initializing, pshazz will use the theme configured in $env:USERPROFILE/.pshazz
 # or otherwise revert to the default theme.
-. "$psscriptroot\..\lib\core.ps1"
-. "$psscriptroot\..\lib\help.ps1"
-. "$psscriptroot\..\lib\theme.ps1"
-. "$psscriptroot\..\lib\plugin.ps1"
-. "$psscriptroot\..\lib\config.ps1"
 
 function init($theme_name) {
-	$theme = theme $theme_name
+    $theme = theme $theme_name
 
-	if(!$theme) {
-		"pshazz: error: couldn't load theme '$theme_name' in $themedir"
+    if (!$theme) {
+        "pshazz: error: couldn't load theme '$theme_name'."
 
-		# try reverting to default theme
-		if($theme_name -ne 'default') {
-			$theme_name = 'default'
-			$theme = theme $theme_name
-		}
-		else { exit 1 } # already tried loading default theme, abort
-	}
+        # try reverting to default theme
+        if ($theme_name -ne 'default') {
+            $theme_name = 'default'
+            $theme = theme $theme_name
+        } else {
+            # already tried loading default theme, abort
+            exit 1
+        }
+    }
 
-	$global:pshazz = @{ }
-	$pshazz.theme_name = $theme_name
-	$pshazz.theme = $theme
-	$pshazz.completions = @{ }
+    $global:pshazz = @{}
+    $pshazz.theme_name = $theme_name
+    $pshazz.theme = $theme
+    $pshazz.completions = @{}
 
-	@($theme.plugins) |? { $_ } |% {
-		plugin:init $_
-	}
+    @($theme.plugins) | Where-Object { $_ } | ForEach-Object {
+        plugin:init $_
+    }
 }
 
 $theme = get_config 'theme'
 
 # get a random theme
 if ($theme -eq 'random') {
-	$themes = @()
-	gci "$themedir" "*.json" | % { 
-		$themes += $($_.name -replace '.json$', '') 
-	}
-	if(Test-Path $user_themedir) {
-		gci "$user_themedir" "*.json" | % { 
-			$themes += $($_.name -replace '.json$', '') 
-		}
-	} 
-	$theme = $themes[(get-random -maximum ($themes.Count) -setseed (get-random -maximum (get-random)))]
-	"pshazz: loaded random theme $theme"
+    $themes = @()
+
+    Get-ChildItem "$themeDir" "*.json" | ForEach-Object {
+        $themes += $($_.Name -replace '.json$', '')
+    }
+
+    if (Test-Path $userThemeDir) {
+        Get-ChildItem "$userThemeDir" "*.json" | ForEach-Object {
+            $themes += $($_.Name -replace '.json$', '')
+        }
+    }
+
+    $theme = $themes[(Get-Random -Maximum ($themes.Count) -SetSeed (Get-Random -Maximum (Get-Random)))]
+    "pshazz: loaded random theme $theme"
 }
 
-if(!$theme) { $theme = 'default' }
+if (!$theme) {
+    $theme = 'default'
+}
+
 init $theme
 
-. "$psscriptroot\..\lib\prompt.ps1"
-. "$psscriptroot\..\lib\completion.ps1"
+. "$PSScriptRoot\..\lib\prompt.ps1"
+. "$PSScriptRoot\..\lib\completion.ps1"

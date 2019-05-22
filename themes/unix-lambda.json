@@ -1,6 +1,4 @@
 {
-	"plugins": [ "git" ],
-	"prompt": [
-		[ "white", "", " $([text.encoding]::utf8.getstring((206,187)))" ]
-	]
+    "plugins": ["git"],
+    "prompt": [["white", "", " $([text.encoding]::utf8.getstring((206,187)))"]]
 }
