@@ -1,12 +1,12 @@
 {
-    "plugins": [ "git", "ssh", "z", "aliases" ],
+    "plugins": ["git", "ssh", "z", "aliases"],
     "prompt": [
-        [ "darkred", "", "" ],
-        [ "green", "", " $path" ],
-        [ "", "", " $git_branch" ],
-        [ "", "", " $git_local_state" ],
-        [ "", "", " $git_remote_state" ],
-        [ "yellow", "", " `$" ]
+        ["darkred", "", ""],
+        ["green", "", " $path"],
+        ["", "", " $git_branch"],
+        ["", "", " $git_local_state"],
+        ["", "", " $git_remote_state"],
+        ["yellow", "", " `$"]
     ],
     "git": {
         "prompt_unstaged": "*",

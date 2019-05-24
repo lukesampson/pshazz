@@ -1,21 +1,21 @@
 {
-	"plugins": [ "git", "ssh", "z" ],
-	"prompt": [
-		[ "red", "", "$user" ],
-		[ "", "", "@$hostname" ],
-		[ "blue", "", " $git_local_state" ],
-		[ "cyan", "", " $git_remote_state" ],
-		[ "cyan", "", " ($git_branch)" ],
-		[ "yellow", "", " $dir" ],
-		[ "green", "", " `n`$" ]
-	],
-	"git": {
-		"prompt_unstaged": "*",
-		"prompt_staged": "+",
-		"prompt_stash": "$",
-		"prompt_untracked": "%",
-		"prompt_remote_push": ">",
-		"prompt_remote_pull": "<",
-		"prompt_remote_same": "="
-	}
+    "plugins": ["git", "ssh", "z"],
+    "prompt": [
+        ["red", "", "$user"],
+        ["", "", "@$hostname"],
+        ["blue", "", " $git_local_state"],
+        ["cyan", "", " $git_remote_state"],
+        ["cyan", "", " ($git_branch)"],
+        ["yellow", "", " $dir"],
+        ["green", "", " `n`$"]
+    ],
+    "git": {
+        "prompt_unstaged": "*",
+        "prompt_staged": "+",
+        "prompt_stash": "$",
+        "prompt_untracked": "%",
+        "prompt_remote_push": ">",
+        "prompt_remote_pull": "<",
+        "prompt_remote_same": "="
+    }
 }

@@ -1,27 +1,27 @@
 {
-	"plugins": [ "git", "ssh", "z" ],
-	"prompt": [
-		[ "blue",  "", "$user" ],
-		[ "white",  "", " at" ],
-		[ "yellow",  "", " $hostname" ],
-		[ "white",  "", " in" ],
-		[ "green",  "", " $path" ],
-		[ "white",  "", " (" ],
-		[ "cyan",  "", "$git_branch" ],
-		[ "white",   "", " $git_local_state" ],
-		[ "white",   "", " $git_remote_state" ],
-		[ "white", "", ")`n`$" ]
-	],
-	"git": {
-		"prompt_unstaged": "*",
-		"prompt_staged": "+",
-		"prompt_stash": "$",
-		"prompt_untracked": "%",
-		"prompt_remote_push": ">",
-		"prompt_remote_pull": "<",
-		"prompt_remote_same": "="
-	},
-	"hg": {
-		"prompt_dirty": "*"
-	}
+    "plugins": ["git", "ssh", "z"],
+    "prompt": [
+        ["blue", "", "$user"],
+        ["white", "", " at"],
+        ["yellow", "", " $hostname"],
+        ["white", "", " in"],
+        ["green", "", " $path"],
+        ["white", "", " ("],
+        ["cyan", "", "$git_branch"],
+        ["white", "", " $git_local_state"],
+        ["white", "", " $git_remote_state"],
+        ["white", "", ")`n`$"]
+    ],
+    "git": {
+        "prompt_unstaged": "*",
+        "prompt_staged": "+",
+        "prompt_stash": "$",
+        "prompt_untracked": "%",
+        "prompt_remote_push": ">",
+        "prompt_remote_pull": "<",
+        "prompt_remote_same": "="
+    },
+    "hg": {
+        "prompt_dirty": "*"
+    }
 }
