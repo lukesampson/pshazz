@@ -16,7 +16,7 @@ function pshazz:aliases:init {
     Set-PAlias 'll' 'ls'
 
     # Theme aliases
-    $global:pshazz.theme.aliases.add.psobject.Properties | ForEach-Object {
+    $global:pshazz.theme.aliases.add.psobject.Properties | Where-Object { $_ } | ForEach-Object {
         Set-PAlias $_.Name $_.Value
     }
 }
