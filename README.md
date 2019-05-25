@@ -13,7 +13,11 @@ Pshazz is designed to work with themes, so you can create your own [theme](https
 ### Installation
 Using [Scoop](http://scoop.sh):
 
-	scoop install pshazz
+```
+scoop install pshazz
+```
+
+If you don't have Scoop installed, you can download a zip of this repository, and add `bin\pshazz.ps1` to your PATH.
 
 ### On the shoulders of giants...
 Pshazz borrows heavily from:
@@ -24,3 +28,7 @@ Pshazz borrows heavily from:
 * [z.ps](https://github.com/JannesMeyer/z.ps) by [Jannes Meyer](https://github.com/JannesMeyer) for rapid system navigation
 
 Inspired by [Oh-My-Zsh](https://github.com/robbyrussell/oh-my-zsh).
+
+### License
+
+Public Domain
