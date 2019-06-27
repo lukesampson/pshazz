@@ -119,6 +119,7 @@ function Start-NativeSshAgent([switch]$Verbose) {
             Set-Service "ssh-agent" -StartupType 'Manual'
         } else {
             Write-Host "The ssh-agent service is disabled. Please enable the service and try again." -f DarkRed
+            Write-Host "You can enable it by running 'Set-Service ssh-agent -StartupType Manual'" -f Cyan
             # Exit with true so Start-SshAgent doesn't try to do any other work.
             return $true
         }
