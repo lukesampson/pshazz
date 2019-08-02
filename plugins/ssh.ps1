@@ -18,20 +18,22 @@ function Import-AgentEnv() {
 function Get-SshAgent() {
     $agentPid = $env:SSH_AGENT_PID
     if ($agentPid) {
-        $sshAgentProcess = Get-Process | Where-Object {
-            ($_.Id -eq $agentPid) -and ($_.Name -eq 'ssh-agent')
-        }
-        if ($null -ne $sshAgentProcess) {
+        ssh-add -l 2>&1 > $null
+        $code = $lastexitcode
+        if ($code -lt 2) {
             return $agentPid
+        } else {
+           $env:SSH_AGENT_PID = $null
+           $env:SSH_AUTH_SOCK = $null
         }
-        else {
-            # Remove SSH_AGENT_PID and SSH_AUTH_SOCK which is unavailable
-            $env:SSH_AGENT_PID = $null
-            $env:SSH_AUTH_SOCK = $null
-            if (Test-Path $agentEnvFile) {
-                Remove-Item $agentEnvFile
-            }
-        }
+    }
+
+    # We cannot reach non win32-openssh ssh-agent processes. SSH_AUTH_SOCK is invalid. 
+    # Kill these processes and remove the agentEnvFile.
+    if (Test-Path $agentEnvFile) {
+         Write-Host "Killing the stale agents."
+         get-process | where-object { $_.Name -eq 'ssh-agent' } | kill
+         Remove-Item $agentEnvFile
     }
 
     return 0
