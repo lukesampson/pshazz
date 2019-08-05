@@ -33,7 +33,7 @@ function Get-SshAgent() {
         if ($Verbose) {
             Write-Host "Killing stale ssh agents."
         }
-         get-process | where-object { $_.Name -eq 'ssh-agent' } | kill
+        Get-Process | Where-Object { $_.Name -eq 'ssh-agent' } | Stop-Process
          Remove-Item $agentEnvFile
     }
 
