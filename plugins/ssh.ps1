@@ -30,7 +30,9 @@ function Get-SshAgent() {
     # We cannot reach non win32-openssh ssh-agent processes. SSH_AUTH_SOCK is invalid. 
     # Kill these processes and remove the agentEnvFile.
     if (Test-Path $agentEnvFile) {
-         Write-Host "Killing the stale agents."
+        if ($Verbose) {
+            Write-Host "Killing stale ssh agents."
+        }
          get-process | where-object { $_.Name -eq 'ssh-agent' } | kill
          Remove-Item $agentEnvFile
     }
