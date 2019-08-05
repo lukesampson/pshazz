@@ -34,7 +34,7 @@ function Get-SshAgent() {
             Write-Host "Killing stale ssh agents."
         }
         Get-Process | Where-Object { $_.Name -eq 'ssh-agent' } | Stop-Process
-         Remove-Item $agentEnvFile
+        Remove-Item $agentEnvFile
     }
 
     return 0
