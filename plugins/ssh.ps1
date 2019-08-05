@@ -18,7 +18,7 @@ function Import-AgentEnv() {
 function Get-SshAgent() {
     $agentPid = $env:SSH_AGENT_PID
     if ($agentPid) {
-        ssh-add -l 2>&1 > $null
+        (& ssh-add -l) | Out-Null
         $code = $lastexitcode
         if ($code -lt 2) {
             return $agentPid
