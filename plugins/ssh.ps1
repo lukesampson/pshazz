@@ -19,7 +19,7 @@ function Get-SshAgent() {
     $agentPid = $env:SSH_AGENT_PID
     if ($agentPid) {
         (& ssh-add -l) | Out-Null
-        if ($code -lt 2) {
+        if ($LASTEXITCODE -lt 2) {
             return $agentPid
         } else {
            $env:SSH_AGENT_PID = $null
