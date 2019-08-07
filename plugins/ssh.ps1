@@ -16,22 +16,41 @@ function Import-AgentEnv() {
 # Retrieve the current SSH agent PID (or zero).
 # Can be used to determine if there is a running agent.
 function Get-SshAgent() {
-    $agentPid = $env:SSH_AGENT_PID
-    if ($agentPid) {
-        $sshAgentProcess = Get-Process | Where-Object {
-            ($_.Id -eq $agentPid) -and ($_.Name -eq 'ssh-agent')
+    $cygwinId = $env:SSH_AGENT_PID
+    if ($cygwinId) {
+        if ($Verbose) {
+            Write-Host "Agent found with Cygwin ID: $cygwinId"
         }
-        if ($null -ne $sshAgentProcess) {
-            return $agentPid
-        }
-        else {
-            # Remove SSH_AGENT_PID and SSH_AUTH_SOCK which is unavailable
-            $env:SSH_AGENT_PID = $null
-            $env:SSH_AUTH_SOCK = $null
-            if (Test-Path $agentEnvFile) {
-                Remove-Item $agentEnvFile
+        (& ssh-add -l) | Out-Null
+        if ($LASTEXITCODE -lt 2) {
+            if ($Verbose) {
+                Write-Host "Using existing agent."
             }
+            return $cygwinId
+        } else {
+            if ($Verbose) {
+                Write-Host "Cannot reach existing agent, removing Environment variables."
+            }
+           $env:SSH_AGENT_PID = $null
+           $env:SSH_AUTH_SOCK = $null
         }
+    }
+
+    # We cannot reach non win32-openssh ssh-agent processes. SSH_AUTH_SOCK is invalid. 
+    # Kill these processes and remove the agentEnvFile.
+    if (Test-Path $agentEnvFile) {
+        if ($Verbose) {
+            Write-Host "Killing stale ssh agents."
+        }
+        if (Test-Administrator) {
+            Get-Process -IncludeUserName `
+              | Where-Object { $_.Name -eq 'ssh-agent' `
+              -and $_.UserName -eq ([Security.Principal.WindowsIdentity]::GetCurrent().Name)} `
+              | Stop-Process
+        } else {
+            Get-Process | Where-Object { $_.Name -eq 'ssh-agent' } | Stop-Process
+        }
+        Remove-Item $agentEnvFile
     }
 
     return 0
@@ -147,12 +166,19 @@ function Start-SshAgent([switch]$Verbose) {
     # Import old ssh-agent envs if it exists
     Import-AgentEnv
 
-    [int]$agentPid = Get-SshAgent
-    if ($agentPid -gt 0) {
+    [int]$cygwinId = Get-SshAgent
+    if ($cygwinId -gt 0) {
         if ($Verbose) {
-            $agentName = Get-Process -Id $agentPid | Select-Object -ExpandProperty Name
-            if (!$agentName) { $agentName = "SSH Agent" }
-            Write-Host "$agentName is already running (pid $($agentPid))"
+            if (Test-Administrator) {
+                $agentPid = Get-Process -IncludeUserName `
+                  | Where-Object { $_.Name -eq 'ssh-agent' `
+                  -and $_.UserName -eq ([Security.Principal.WindowsIdentity]::GetCurrent().Name)} `
+                  | Select-Object -ExpandProperty Id
+            } else {
+                $agentPid = Get-Process | Where-Object { $_.Name -eq 'ssh-agent' } `
+                  | Select-Object -ExpandProperty Id
+            }
+            Write-Host "ssh-agent(s) already running (pid $($agentPid))"
         }
         return
     }
