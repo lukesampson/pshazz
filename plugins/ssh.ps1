@@ -4,12 +4,13 @@
 
 # Note: the agent env file is for non win32-openssh (like, cygwin/msys openssh),
 #       win32-openssh doesn't need this, it runs as system service.
-$agentEnvFile = "$env:USERPROFILE/.ssh/agent.env.ps1"
+$agentEnvFilePs = "$env:USERPROFILE/.ssh/agent.env.ps1"
+$agentEnvFileSh = "$env:USERPROFILE/.ssh/agent.env"
 
 function Import-AgentEnv() {
-    if (Test-Path $agentEnvFile) {
+    if (Test-Path $agentEnvFilePs) {
         # Source the agent env file
-        . $agentEnvFile | Out-Null
+        . $agentEnvFilePs | Out-Null
     }
 }
 
@@ -38,7 +39,7 @@ function Get-SshAgent() {
 
     # We cannot reach non win32-openssh ssh-agent processes. SSH_AUTH_SOCK is invalid. 
     # Kill these processes and remove the agentEnvFile.
-    if (Test-Path $agentEnvFile) {
+    if (Test-Path $agentEnvFilePs) {
         if ($Verbose) {
             Write-Host "Killing stale ssh agents."
         }
@@ -50,7 +51,8 @@ function Get-SshAgent() {
         } else {
             Get-Process | Where-Object { $_.Name -eq 'ssh-agent' } | Stop-Process
         }
-        Remove-Item $agentEnvFile
+        Remove-Item $agentEnvFilePs
+	Remove-Item $agentEnvFileSh
     }
 
     return 0
@@ -128,8 +130,9 @@ function Start-NativeSshAgent([switch]$Verbose) {
     }
 
     # Native ssh doesn't need agentEnvFile, remove it.
-    if (Test-Path $agentEnvFile) {
-        Remove-Item $agentEnvFile
+    if (Test-Path $agentEnvFilePs) {
+        Remove-Item $agentEnvFilePs
+	Remove-Item $agentEnvFileSh -ErrorAction SilentyContinue
     }
 
     # Enable the servivce if it's disabled and we're an admin
@@ -184,12 +187,15 @@ function Start-SshAgent([switch]$Verbose) {
     }
 
     # Start ssh-agent and get output, translate to
-    # powershell type and write into agent env file
-    (& ssh-agent) `
+    # powershell type and write into agent env file for both powershell and bash
+    $sshAgentOutput = (& ssh-agent)
+    $sshAgentOutput `
         -creplace '([A-Z_]+)=([^;]+).*', '$$env:$1="$2"' `
         -creplace 'echo ([^;]+);' `
         -creplace 'export ([^;]+);' `
-        | Out-File -FilePath $agentEnvFile -Encoding ascii -Force
+        | Out-File -FilePath $agentEnvFilePs -Encoding ascii -Force
+    $sshAgentOutput | Out-File -FilePath $agentEnvFileSh -Encoding ascii -Force
+
     # And then import new ssh-agent envs
     Import-AgentEnv
 
