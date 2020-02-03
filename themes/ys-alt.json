@@ -1,0 +1,52 @@
+{
+    "plugins": ["git", "ssh", "z", "dircolors"],
+    "prompt": [
+        [
+            "red",
+            "",
+            "`n$(if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) { 'A' } else { '~' } )"
+        ],
+        ["cyan", "", " $user"],
+        ["white", "", "@"],
+        ["green", "", "$hostname"],
+        ["white", "", "->"],
+        ["yellow", "", "$path"],
+        ["green", "", "$(if ($git_branch) {' ['} else {''})"],
+        ["cyan", "", "$git_branch"],
+        ["white", "", " $git_local_state"],
+        ["red", "", " $git_remote_state"],
+        ["green", "", "$(if ($git_branch) {']'} else {''})"],
+        ["gray", "", "`n$([datetime]::now.tostring(\"dd-MM HH:mm:ss\"))"],
+        ["magenta", "", "$"]
+    ],
+    "git": {
+        "prompt_unstaged": "*",
+        "prompt_staged": "+",
+        "prompt_stash": "$",
+        "prompt_untracked": "!",
+        "prompt_remote_push": ">",
+        "prompt_remote_pull": "<",
+        "prompt_remote_same": "="
+    },
+    "dircolors": {
+        "dirs": [
+            [".*", "cyan", ""]
+        ],
+        "files": [
+            ["(?ix).(7z|zip|tar|gz|rar|xz|bz2|bzip2)$",
+                "darkcyan",   ""],
+            ["(?ix).(exe|bat|cmd|pl|ps1|psm1|vbs|rb|reg|sh|zsh|bin)$",
+                "darkgreen",  ""],
+            ["(?ix).(doc|docx|pdf|html|ppt|pptx|xls|xlsx|mdb|mdf|ldf|odt|odf|odg|odm|ods|otg|otp|ott|oxt)$",
+                "magenta",    ""],
+            ["(?ix).(txt|cfg|conf|config|yml|ini|csv|log|json|odb|md)$",
+                "yellow", ""],
+            ["(?ix).(c|h|cpp|js|py|java|scala|cs|php)$",
+                "green", ""],
+            ["(?ix).(sln|csproj|sqlproj|proj|targets|ignore)$",
+                "darkred",    ""],
+            [".*",
+                "darkgray",   ""]
+        ]
+     }
+}
