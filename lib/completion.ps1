@@ -1,7 +1,7 @@
 # pshazz tab completion
 
 # Backup previous TabExpansion function
-if (Test-Path Function:\TabExpansion) {
+if ((Test-Path Function:\TabExpansion) -and !$global:PshazzTabExpansionPatched) {
     Rename-Item Function:\TabExpansion global:PshazzTabExpansionBackup
 }
 
@@ -21,3 +21,6 @@ function global:TabExpansion($line, $lastWord) {
         PshazzTabExpansionBackup $line $lastWord
     }
 }
+
+# Rememeber that we've patched TabExpansion, to avoid doing it a second time.
+$global:PshazzTabExpansionPatched = $true
