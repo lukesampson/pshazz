@@ -1,4 +1,4 @@
-﻿function pshazz:dircolors:init {
+function pshazz:dircolors:init {
   if (!$global:pshazz_dircolors_iswrapped) {
 	wrap_command out-default -Process {
       if ($global:pshazz.theme.dircolors) {
@@ -64,6 +64,7 @@ function global:pshazz:dircolors:format_size($item) {
   if ($item -is [System.IO.DirectoryInfo]) {
     ""
   }
+  elseif (!$item.Exists) { "NA" }
   elseif ($item.Length -lt 1KB) {
     (($item.Length.ToString("n0")) + " B ")
   }
