@@ -110,6 +110,7 @@ function global:pshazz_write_prompt($prompt, $vars) {
 if (!$global:pshazz.theme.prompt) { return } # no prompt specified, keep existing
 
 function global:prompt {
+    $saved_lastoperationstatus = $? # status of win32 AND powershell command (False on interrupts)
     $saved_lastexitcode = $lastexitcode
 
     $global:pshazz.prompt_vars = @{
