@@ -99,7 +99,7 @@ function global:pshazz_write_prompt($prompt, $vars) {
         }
 
         if (![String]::IsNullOrWhiteSpace($str)) {
-            $fg = $_[0]; $bg = $_[1]
+            $fg = eval $_[0]; $bg = eval $_[1]
             if (!$fg) { $fg = $fg_default }
             if (!$bg) { $bg = $bg_default }
             Write-Host $str -NoNewline -ForegroundColor $fg -BackgroundColor $bg
