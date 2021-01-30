@@ -99,7 +99,7 @@ function global:pshazz_write_prompt($prompt, $vars) {
         }
 
         if (![String]::IsNullOrWhiteSpace($str)) {
-            $fg = $_[0]; $bg = $_[1]
+            $fg = eval $_[0]; $bg = eval $_[1]
             if (!$fg) { $fg = $fg_default }
             if (!$bg) { $bg = $bg_default }
             Write-Host $str -NoNewline -ForegroundColor $fg -BackgroundColor $bg
@@ -110,6 +110,7 @@ function global:pshazz_write_prompt($prompt, $vars) {
 if (!$global:pshazz.theme.prompt) { return } # no prompt specified, keep existing
 
 function global:prompt {
+    $saved_lastoperationstatus = $? # status of win32 AND powershell command (False on interrupts)
     $saved_lastexitcode = $lastexitcode
 
     $global:pshazz.prompt_vars = @{
