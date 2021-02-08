@@ -1,6 +1,6 @@
 function pshazz:k8s:init {
     $theme = $global:pshazz.theme.k8s
-    $global:pshazz.git = @{
+    $global:pshazz.k8s = @{
 		prompt_lbracket    = $theme.prompt_lbracket;
 		prompt_rbracket    = $theme.prompt_rbracket;
 	}
@@ -8,12 +8,12 @@ function pshazz:k8s:init {
 
 function global:pshazz:k8s:prompt {
     $vars = $global:pshazz.prompt_vars
-    $K8sContext=$(Get-Content ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
+    $k8s_context=$(Get-Content ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
 
-    If ($K8sContext) {
+    If ($k8s_context) {
         $vars.git_lbracket = $global:pshazz.k8s.prompt_lbracket
         $vars.git_rbracket = $global:pshazz.k8s.prompt_rbracket
 
-        $vars.k8s_context = $K8sContext
+        $vars.k8s_context = $k8s_context
     }
 }
