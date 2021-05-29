@@ -8,7 +8,8 @@ function pshazz:k8s:init {
 
 function global:pshazz:k8s:prompt {
     $vars = $global:pshazz.prompt_vars
-    $k8s_context=$(Get-Content ~/.kube/config | grep "current-context:" | sed "s/current-context: //")
+    $kubeconfig = if ($env:KUBECONFIG) { $env:KUBECONFIG } else { "~/.kube/config" }
+    $k8s_context=$(Get-Content $kubeconfig | grep "current-context:" | sed "s/current-context: //")
 
     If ($k8s_context) {
         $vars.git_lbracket = $global:pshazz.k8s.prompt_lbracket
