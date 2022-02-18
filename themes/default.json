@@ -23,7 +23,7 @@
         "prompt_dirty": "*"
     },
     "ssh": {
-	"verbose": false,
-	"ignoreNativeAgent": false
+        "verbose": false,
+        "ignoreNativeAgent": false
     }
 }
