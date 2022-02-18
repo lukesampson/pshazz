@@ -52,7 +52,7 @@ function Get-SshAgent() {
             Get-Process | Where-Object { $_.Name -eq 'ssh-agent' } | Stop-Process
         }
         Remove-Item $agentEnvFilePs
-	Remove-Item $agentEnvFileSh
+        Remove-Item $agentEnvFileSh
     }
 
     return 0
@@ -132,7 +132,7 @@ function Start-NativeSshAgent([switch]$Verbose) {
     # Native ssh doesn't need agentEnvFile, remove it.
     if (Test-Path $agentEnvFilePs) {
         Remove-Item $agentEnvFilePs
-	Remove-Item $agentEnvFileSh -ErrorAction SilentyContinue
+        Remove-Item $agentEnvFileSh -ErrorAction SilentlyContinue
     }
 
     # Enable the servivce if it's disabled and we're an admin
@@ -142,6 +142,7 @@ function Start-NativeSshAgent([switch]$Verbose) {
         } else {
             Write-Host "The ssh-agent service is disabled. Please enable the service and try again." -f DarkRed
             Write-Host "You can enable it by running 'Set-Service ssh-agent -StartupType Manual'" -f Cyan
+            Write-Host "If you don't want to use the native agent set 'ignoreNativeAgent' true in your theme config" -f Cyan
             # Exit with true so Start-SshAgent doesn't try to do any other work.
             return $true
         }
@@ -162,7 +163,7 @@ function Start-NativeSshAgent([switch]$Verbose) {
 
 function Start-SshAgent([switch]$Verbose) {
     # If we're using the native OpenSSH, we can just interact with the service directly.
-    if (Start-NativeSshAgent -Verbose:$Verbose) {
+    if (!$global:pshazz.theme.ssh.ignoreNativeAgent -and (Start-NativeSshAgent -Verbose:$Verbose)) {
         return
     }
 
@@ -188,16 +189,38 @@ function Start-SshAgent([switch]$Verbose) {
 
     # Start ssh-agent and get output, translate to
     # powershell type and write into agent env file for both powershell and bash
-    $sshAgentOutput = (& ssh-agent)
+    $sshAgent = (Get-Command "ssh-agent.exe").Source
+
+    if (!(Test-Path $sshAgent)) {
+       Write-Host "$sshAgent not found"
+       return
+    }
+
+    Write-Host -NoNewLine "Ssh-agent $sshAgent Is starting...";
+
+    $agentProcess = Start-Process $sshAgent  -PassThru -NoNewWindow -RSO $agentEnvFileSh
+    $sshAgentOutput = Get-Content -Path $agentEnvFileSh
+
+    while((($sshAgentOutput | Measure-Object -Line).Lines) -lt 3) {
+       $sshAgentOutput = Get-Content -Path $agentEnvFileSh
+       Write-Host -NoNewLine ($sshAgentOutput | Measure-Object -Line).Lines ".";
+       Start-Sleep 1;
+    }
+    Write-Host "Started"
+
     $sshAgentOutput `
         -creplace '([A-Z_]+)=([^;]+).*', '$$env:$1="$2"' `
         -creplace 'echo ([^;]+);' `
         -creplace 'export ([^;]+);' `
         | Out-File -FilePath $agentEnvFilePs -Encoding ascii -Force
+
     $sshAgentOutput | Out-File -FilePath $agentEnvFileSh -Encoding ascii -Force
 
     # And then import new ssh-agent envs
     Import-AgentEnv
+
+    [Environment]::SetEnvironmentVariable("SSH_AUTH_SOCK",$env:SSH_AUTH_SOCK,"USER");
+    [Environment]::SetEnvironmentVariable("SSH_AGENT_PID",$env:SSH_AGENT_PID,"USER");
 
     Add-SshKey -Verbose:$Verbose
 }
@@ -233,6 +256,13 @@ function pshazz:ssh:init {
     if ($ssh.verbose -eq "true") {
         $Verbose = $true
     }
+
+    if ($Verbose) {
+       Write-Host "Using ssh-add from" (Get-Command "ssh-add.exe").Source
+       Write-Host "Using ssh-agent from" (Get-Command "ssh-agent.exe").Source
+       Write-Host "If these are wrong, change the PATH in $PROFILE"
+    }
+
     if (Test-IsSshBinaryMissing -Verbose:$Verbose) { return }
     Start-SshAgent -Verbose:$Verbose
 

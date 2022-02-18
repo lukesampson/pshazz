@@ -21,5 +21,9 @@
     },
     "hg": {
         "prompt_dirty": "*"
+    },
+    "ssh": {
+	"verbose": false,
+	"ignoreNativeAgent": false
     }
 }
