@@ -2,6 +2,9 @@
 # also adds some commonly used aliases
 # you can specify more aliases to add and remove in the theme under aliases.rm and aliases.add
 function pshazz:aliases:init {
+    # Add default aliases
+    Set-PAlias 'll' 'ls'
+
     # remove default/theme aliases
     $remove = @($global:pshazz.theme.aliases.rm) + ('curl', 'wget', 'r') | Where-Object { $_ } # theme overrides
     $remove | ForEach-Object {
@@ -11,9 +14,6 @@ function pshazz:aliases:init {
             Remove-Item "alias:\$_" -Force
         }
     }
-
-    # Add default aliases
-    Set-PAlias 'll' 'ls'
 
     # Theme aliases
     $global:pshazz.theme.aliases.add.psobject.Properties | Where-Object { $_ } | ForEach-Object {
