@@ -139,6 +139,7 @@ function Start-NativeSshAgent([switch]$Verbose) {
         } else {
             Write-Host "The ssh-agent service is disabled. Please enable the service and try again." -f DarkRed
             Write-Host "You can enable it by running 'Set-Service ssh-agent -StartupType Manual'" -f Cyan
+            Write-Host "If you don't want to use the native agent set 'ignoreNativeAgent' true in your theme config" -f Cyan
             # Exit with true so Start-SshAgent doesn't try to do any other work.
             return $true
         }
@@ -159,7 +160,7 @@ function Start-NativeSshAgent([switch]$Verbose) {
 
 function Start-SshAgent([switch]$Verbose) {
     # If we're using the native OpenSSH, we can just interact with the service directly.
-    if (Start-NativeSshAgent -Verbose:$Verbose) {
+    if (!$global:pshazz.theme.ssh.ignoreNativeAgent -and (Start-NativeSshAgent -Verbose:$Verbose)) {
         return
     }
 
