@@ -17,41 +17,7 @@ Using [Scoop](http://scoop.sh):
 scoop install pshazz
 ```
 
-If you don't have Scoop installed, you can download a zip of this
-repository, and add `bin\pshazz.ps1` to your PATH.
-
-### The SSH helper
-When
-- you don't have admin rights
-- and, the native OpenSSH client is installed,
-- and the native ssh-agent service is disabled
-
-using the SSH helper is not straight forward and needs to be worked around.
-
-#### Short version:
-
-- `scoop install openssh`
-- Add the scoop shims folder as the *first* `$PATH` item in your `$Profile`:
-  ```$env:PATH=$HOME+"\scoop\shims;"+$env:PATH```
-
-#### Long version:
-
-It is possible to install openssh with `scoop install openssh` as a
-normal user and start the ssh-agent as a background process.
-
-However `ssh.exe`, `ssh-agent.exe`, `ssh-add.exe` will be the ones of the native OpenSSH client. The is because user path PATH, which included the scoop openssh binaries is always appended to the systems PATH. The OpenSSH binaries are found first and used. 
-
-To solve this issue you can add the following line to your `$Profile`. Which is in my case: `$HOME/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1`
-
-
-```
-$env:PATH=$HOME+"\scoop\shims;"+$env:PATH
-```
-
-You can check these registry keys for the system and the user paths:
-- System: `req query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v path`
-- User: `req query "HKCU\Environment" /v path`
-
+If you don't have Scoop installed, you can download a zip of this repository, and add `bin\pshazz.ps1` to your PATH.
 
 ### On the shoulders of giants...
 Pshazz borrows heavily from:
